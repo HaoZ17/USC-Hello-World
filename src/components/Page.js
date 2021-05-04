@@ -15,7 +15,7 @@ const BLOCKED_LIST_PAGE = "BLOCKED";
 const C_CURRENT_PAGE = "current-page";
 
 const ROUTER_MAPPING = {
-    HOME: "/home",
+    HOME: "/",
     MOVIES: "/movies",
     LIKED: "/liked",
     BLOCKED: "/blocked"
@@ -50,7 +50,7 @@ function Page (props) {
                 </nav>
                 <section className="page-content">
                     <Switch>
-                        <Route path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <button>here to render home page</button></Route>
+                        <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <button>here to render home page</button></Route>
                         <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> here to render movies page</Route>
                         <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
                         <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> here to render blocked page</Route>
