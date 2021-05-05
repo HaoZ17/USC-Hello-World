@@ -1,6 +1,8 @@
 import "../css/page.css";
 import {useState} from "react";
-import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom"
+import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
+import AppsIcon from '@material-ui/icons/Apps';
+import CancelIcon from '@material-ui/icons/Cancel';
 /**
  * The navgation bar will be used in 4 different pages
  * @param {Object} props -  
@@ -29,6 +31,25 @@ function Page (props) {
         setCurrentPage(e.target.innerHTML.trim());
     }
 
+    window.onresize =  (e) => {
+        const pageNav = document.getElementById("page-nav");
+        if (pageNav.style.display && e.target.innerWidth > 798) {
+            pageNav.removeAttribute("style")
+        }
+    }
+
+    const handleClickMenuIcon = (e) => {
+        const pageNav = document.getElementById("page-nav");
+
+        pageNav.style.display = "block";
+    }
+
+    const handleClickCloseMenuIcon = (e) => {
+        const pageNav = document.getElementById("page-nav");
+
+        pageNav.removeAttribute("style");
+    }
+
     const createLink = (title, path, index) => {
         return <Link to={path} key={index}>
             <span className={currentPage === title ? C_CURRENT_PAGE: null} onClick={handleClickTitle}> {title} </span>
@@ -37,26 +58,29 @@ function Page (props) {
 
     return (
         <Router>
-            <div className="page">
-                <nav className="page-nav">
-                    <a className={C_LOGO} href=".">
-                        {props.img ? <img src={props.img} id={C_LOGO_IMG} alt={C_LOGO_IMG}></img> : <span>Movie<span id="logo-text">World</span></span>}
-                    </a>
-                    <ul className="page-nav-link">
+            <div className="page-header">
+                <a className={C_LOGO} href=".">
+                    {props.img ? <img src={props.img} id={C_LOGO_IMG} alt={C_LOGO_IMG}></img> : <span>Movie<span id="logo-text">World</span></span>}
+                </a>
+                <nav id="page-nav">
+                    <ul id="page-nav-link">
                         {
                             Object.entries(ROUTER_MAPPING).map(([title, path], index) => createLink(title, path, index))
                         }
+                        <CancelIcon id="mobile-menu-exit" onClick={handleClickCloseMenuIcon}/>
                     </ul>
+                    
                 </nav>
-                <section className="page-content">
+                <div id="mobile-menu" onClick={handleClickMenuIcon}><AppsIcon fontSize="large"/></div>
+            </div>
+            <section className="page-content">
                     <Switch>
                         <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <button>here to render home page</button></Route>
                         <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> here to render movies page</Route>
                         <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
                         <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> here to render blocked page</Route>
                     </Switch>
-                </section>
-            </div>
+            </section>
         </Router>
     )
 }
