@@ -1,0 +1,72 @@
+:root {
+  --primary-color: rgba(0, 0, 0, 0.9);
+  --secondary-color: 	rgb(166, 166, 166);
+  --logo-text-color: rgb(0, 128, 255);
+}
+
+.page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.page-nav {
+  display: -ms-grid;
+  display: grid;
+  background-color: var(--primary-color);
+  -ms-grid-columns: 300px auto;
+      grid-template-columns: 300px auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.page-nav a {
+  text-decoration: none;
+  font-family: 'Verdana', monospace;
+}
+
+.page-nav .logo {
+  padding: 0.5em 0.5em 0.5em 3em;
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.page-nav .logo #logo-text {
+  color: var(--logo-text-color);
+}
+
+.page-nav .page-nav-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  max-width: -webkit-fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
+  padding-left: 5em;
+}
+
+.page-nav .page-nav-link a {
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  color: lightgrey;
+  font-size: large;
+  padding: 1em 5em;
+}
+
+.page-nav .page-nav-link a:hover {
+  color: white;
+}
+
+.page-nav .page-nav-link .current-page {
+  color: darkgrey;
+}
+/*# sourceMappingURL=page.css.map */

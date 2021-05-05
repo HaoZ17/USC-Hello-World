@@ -1,0 +1,60 @@
+:root {
+    --primary-color: rgba(0, 0, 0, 0.9);
+    --secondary-color: 	rgb(166, 166, 166);
+    --logo-text-color: rgb(0, 128, 255);
+}
+
+// page is the container with a header and the page content
+.page {
+    display: flex;
+    flex-direction: column;
+}
+
+// navigation bar
+.page-nav {
+    display: grid;
+    background-color: var(--primary-color);
+    grid-template-columns: 300px auto;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+        font-family: 'Verdana', monospace;
+        
+    }
+    
+    .logo {
+        padding: 0.5em 0.5em 0.5em 3em;
+        color: white;
+        font-size: x-large;
+        font-weight: bold;
+
+        #logo-text {
+            color: var(--logo-text-color);
+        }
+    }
+
+    // router link of the navigation bar 
+    .page-nav-link {
+        display: flex;
+        justify-content: center;
+        max-width: fit-content;
+        padding-left: 5em;
+        
+        a {
+            transition: color 0.5s ease;
+            color: lightgrey;
+            font-size: large;
+            padding: 1em 5em;
+        }
+
+        a:hover {
+            color: white;
+        }
+
+        .current-page {
+           color: darkgrey;
+        }
+    }
+}
+
