@@ -1,0 +1,127 @@
+:root {
+  --primary-color: rgba(0, 0, 0, 0.9);
+  --secondary-color: 	rgb(166, 166, 166);
+  --logo-text-color: rgb(0, 128, 255);
+}
+
+.page-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  background-color: var(--primary-color);
+}
+
+#mobile-menu {
+  position: absolute;
+  top: 2em;
+  right: 1em;
+  color: white;
+  display: none;
+}
+
+#mobile-menu-exit {
+  position: absolute;
+  z-index: 999;
+  top: 1em;
+  left: 1em;
+  color: white;
+  display: none;
+}
+
+a {
+  text-decoration: none;
+  font-family: 'Verdana', monospace;
+}
+
+.logo {
+  position: relative;
+  margin: 1.5em;
+  color: white;
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.logo #logo-text {
+  color: var(--logo-text-color);
+}
+
+#page-nav {
+  display: block;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  margin: 0.3em;
+}
+
+#page-nav #page-nav-link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 40em;
+}
+
+#page-nav #page-nav-link a {
+  -webkit-transition: color 0.5s ease;
+  transition: color 0.5s ease;
+  color: lightgrey;
+  font-size: large;
+  padding: 1em 0em 1em 3em;
+}
+
+#page-nav #page-nav-link a:hover {
+  color: white;
+}
+
+#page-nav #page-nav-link .current-page {
+  color: darkgrey;
+}
+
+@media only screen and (max-width: 798px) {
+  #mobile-menu {
+    display: inline-block;
+  }
+  #mobile-menu-exit {
+    display: inline-block;
+  }
+  #page-nav {
+    display: none;
+  }
+  #page-nav #page-nav-link {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    position: fixed;
+    z-index: 999;
+    width: 50%;
+    right: 0;
+    top: 0;
+    margin-top: 0;
+    background: #20272E;
+    height: 100vh;
+    padding: 0;
+  }
+  #page-nav #page-nav-link span {
+    display: inline;
+    font-size: medium;
+    margin: 0;
+  }
+  #page-nav #page-nav-link a {
+    padding: 1em 0em 1em;
+  }
+}
+/*# sourceMappingURL=page.css.map */
