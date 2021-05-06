@@ -3,16 +3,13 @@ import {useState} from "react";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import AppsIcon from '@material-ui/icons/Apps';
 import CancelIcon from '@material-ui/icons/Cancel';
-<<<<<<< HEAD
 import BlockList from "../containers/BlockList";
-=======
 import HomePage from "../containers/HomePageContainer";
 import { bindActionCreators } from "redux";
 import React from 'react'
 import {actions} from '../actionsConst/actionCreater'
 import { connect } from "react-redux";
 
->>>>>>> 6bf0584b336d2ee28d195e6089c610bf2bd47639
 /**
  * The navgation bar will be used in 4 different pages
  * @param {Object} props -  
