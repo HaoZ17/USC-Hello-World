@@ -1,14 +1,6 @@
 .home-page-container {
   position: relative;
-  height: 56.7em;
-  width: 100%;
-}
-
-@media only screen and (max-width: 798px) {
-  .home-page-container {
-    position: relative;
-    height: 56.7em;
-    width: 100%;
-  }
+  height: 100vh;
+  width: 100vw;
 }
 /*# sourceMappingURL=homePageContainer.css.map */
