@@ -21,6 +21,8 @@ class Test extends React.Component {
     console.log(this.props.likedList);
     console.log(this.props.blockList);
     console.log(this.props.curPage);
+    console.log(this.props.moviePosters);
+    console.log(this.props.movieBackdrops);
     console.log("..................................................")
   }
   render(){
