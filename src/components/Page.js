@@ -3,6 +3,7 @@ import {useState} from "react";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import AppsIcon from '@material-ui/icons/Apps';
 import CancelIcon from '@material-ui/icons/Cancel';
+import BlockList from "../containers/BlockList";
 /**
  * The navgation bar will be used in 4 different pages
  * @param {Object} props -  
@@ -78,7 +79,8 @@ function Page (props) {
                         <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <button>here to render home page</button></Route>
                         <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> here to render movies page</Route>
                         <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
-                        <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> here to render blocked page</Route>
+                        {/* <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> here to render blocked page</Route> */}
+                        <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> <BlockList /> </Route>
                     </Switch>
             </section>
         </Router>
