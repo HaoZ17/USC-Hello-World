@@ -1,10 +1,14 @@
 :root {
-  --primary-color: rgba(0, 0, 0, 0.9);
+  --primary-color: rgba(0, 0, 0, 1);
   --secondary-color: 	rgb(166, 166, 166);
   --logo-text-color: rgb(0, 128, 255);
 }
 
 .page-header {
+  position: fixed;
+  left: 0em;
+  top: 0em;
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -13,6 +17,13 @@
       -ms-flex-direction: row;
           flex-direction: row;
   background-color: var(--primary-color);
+  z-index: 1000;
+}
+
+.page-content {
+  position: fixed;
+  left: 0em;
+  top: 6.5em;
 }
 
 #mobile-menu {
