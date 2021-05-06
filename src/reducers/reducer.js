@@ -5,6 +5,7 @@ const initialState = {
     cur_max_page:1,
     dataMap: new Map(),
     movieIds: new Set(),
+    movieSet: new Map(),
     moviePosters: new Map(),
     movieBackdrops: new Map(),
     curPage:[],
@@ -24,8 +25,10 @@ const reducer = (state = initialState, action = {}) => {
             let mvIdupdate=new Set();
             let mvPosterUpdate=new Map(state.moviePoster);
             let mvBackdropUpdate=new Map(state.movieBackdrops);
+            let movieSetUpdate=new Map(state.movieSet)
             action.payload.map((movie)=>{
                 mvIdupdate.add(movie.id);
+                movieSetUpdate.set(movie.id,movie);
                 mvPosterUpdate.set(movie.id,Actions.IMGURL+movie.poster_path);
                 mvBackdropUpdate.set(movie.id,Actions.IMGURL+movie.backdrop_path);
             })
@@ -38,6 +41,7 @@ const reducer = (state = initialState, action = {}) => {
                 movieIds: mvIdupdate,
                 moviePosters: mvPosterUpdate,
                 movieBackdrops: mvBackdropUpdate,
+                movieSet:movieSetUpdate,
                 curPage: action.payload
             }
         case Actions.NEXT_PAGE:

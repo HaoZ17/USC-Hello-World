@@ -12,7 +12,7 @@ const store = createStore(reducer,applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Test />
   </Provider>,
   document.getElementById('root')
 );
