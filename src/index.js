@@ -10,9 +10,10 @@ import App from './App';
 import Card from "./components/Card"
 
 const store = createStore(reducer,applyMiddleware(thunk));
+
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Test />
   </Provider>,
   document.getElementById('root')
 );

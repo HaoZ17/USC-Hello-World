@@ -1,0 +1,17 @@
+.carousel-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 60%;
+    height: 55%;
+    border: 2px solid black;
+
+    .mock-card {
+        position: relative;
+        width: 50%;
+        height: 50%;
+        transform: translateX(-50%), translateY(-50%);
+        border: 2px solid red;
+    }
+}
