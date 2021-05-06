@@ -48,13 +48,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export default function RecipeReviewCard({content}) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  console.log("received content", content)
 
   return (
     <Card className={classes.root}>
@@ -71,7 +73,7 @@ export default function RecipeReviewCard() {
 
       <CardMedia
             className={classes.media}
-            image="/static/images/cards/paella.jpg"
+            image={content.poster}
             // title="Paella dish"
       />
 
