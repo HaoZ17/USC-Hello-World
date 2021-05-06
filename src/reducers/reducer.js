@@ -1,4 +1,3 @@
-import axios from "axios";
 import Actions from "../constants";
 
 const initialState = {

@@ -39,6 +39,9 @@ class Test extends React.Component {
           <button onClick={()=>{this.props.actionController.addToBlockPage(615457)}}>addblock2</button>
           <button onClick={()=>{this.props.actionController.removeFromLikedPage(804435)}}>rmlike1</button>
           <button onClick={()=>{this.props.actionController.removeFromBlockPage(615457)}}>rmblock2</button>
+          <p>img and poster</p>
+          <button onClick={()=>{console.log(this.props.moviePosters.get(804435))}}>poster</button>
+          <button onClick={()=>{console.log(this.props.movieBackdrops.get(804435))}}>backDrop</button>
           <p>Sort</p>
           <button onClick={this.props.actionController.timeSort}>timeSort</button>
           <button onClick={this.props.actionController.titleSort}>titleSort</button>
