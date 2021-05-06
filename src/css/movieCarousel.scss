@@ -1,17 +1,33 @@
 .carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
     width: 60%;
     height: 55%;
-    border: 2px solid black;
 
     .mock-card {
         position: relative;
-        width: 50%;
-        height: 50%;
+        width: 90%;
+        height: 90%;
         transform: translateX(-50%), translateY(-50%);
-        border: 2px solid red;
+        background-color: black;
+        padding: 0;
+        color: white;
+        font-size: xx-large;
+        text-align: center;
+        vertical-align: middle;
+        margin: auto;
+        opacity: 0.2;
+    }
+}
+
+@media only screen and (max-width: 798px) {
+    .carousel-container {
+        width: 90%;
+        height: 100%;
     }
 }

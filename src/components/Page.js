@@ -1,14 +1,13 @@
 import "../css/page.css";
-import {useState} from "react";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import AppsIcon from '@material-ui/icons/Apps';
 import CancelIcon from '@material-ui/icons/Cancel';
 import BlockList from "../containers/BlockList";
 import HomePage from "../containers/HomePageContainer";
 import { bindActionCreators } from "redux";
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {actions} from '../actionsConst/actionCreater'
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
 /**
  * The navgation bar will be used in 4 different pages
@@ -32,10 +31,22 @@ const ROUTER_MAPPING = {
 
 function Page (props) {
 
-    const [currentPage, setCurrentPage] = useState(HOME_PAGE);
+    const currentPageNumber = useSelector(state => state.page);
+
+    const currentPageContent = useSelector(state => state.curPage);
+
+    useEffect(() => {
+        props.actionController.movieListRequest();
+    }, []);
+
+    useEffect(() => {
+        props.actionController.movieListRequest();
+    }, [currentPageNumber]);
+
+    const [currentTitle, setcurrentTitle] = useState(HOME_PAGE);
     
     const handleClickTitle = (e) => {
-        setCurrentPage(e.target.innerHTML.trim());
+        setcurrentTitle(e.target.innerHTML.trim());
     }
 
     window.onresize =  (e) => {
@@ -59,7 +70,7 @@ function Page (props) {
 
     const createLink = (title, path, index) => {
         return <Link to={path} key={index}>
-            <span className={currentPage === title ? C_CURRENT_PAGE: null} onClick={handleClickTitle}> {title} </span>
+            <span className={currentTitle === title ? C_CURRENT_PAGE: null} onClick={handleClickTitle}> {title} </span>
         </Link>
     }
 
@@ -76,7 +87,6 @@ function Page (props) {
                         }
                         <CancelIcon id="mobile-menu-exit" onClick={handleClickCloseMenuIcon}/>
                     </ul>
-                    
                 </nav>
                 <div id="mobile-menu" onClick={handleClickMenuIcon}><AppsIcon fontSize="large"/></div>
             </div>
