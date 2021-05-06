@@ -7,7 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
+// import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
@@ -17,12 +17,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { findByLabelText } from '@testing-library/dom';
 
+
+import MenuIcon from '@material-ui/icons/Menu';
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 345,
-    maxWidth : 500,
+    maxWidth: 345,
+    // maxWidth : 500,
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "column"
   },
   media: {
     height: 0,
@@ -55,14 +59,10 @@ export default function RecipeReviewCard() {
   return (
     <Card className={classes.root}>
       <CardHeader
-        // avatar={
-        //   <Avatar aria-label="recipe" className={classes.avatar}>
-        //     R
-        //   </Avatar>
-        // }
         action={
           <IconButton aria-label="settings">
-            <MoreVertIcon />
+            {/* <MoreVertIcon /> */}
+            <MenuIcon/>
           </IconButton>
         }
         title="Movie Name"
@@ -72,7 +72,7 @@ export default function RecipeReviewCard() {
       <CardMedia
             className={classes.media}
             image="/static/images/cards/paella.jpg"
-            title="Paella dish"
+            // title="Paella dish"
       />
 
       <CardContent>
