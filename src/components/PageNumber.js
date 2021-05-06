@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection:'row',
       right:'50%',
       // left:'50%',
-      bottom:'3%',
+      bottom:'3 %',
       
     },
   },

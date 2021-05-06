@@ -3,7 +3,7 @@ import {useState} from "react";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import AppsIcon from '@material-ui/icons/Apps';
 import CancelIcon from '@material-ui/icons/Cancel';
-import MOVIES from "../containers/movies"
+import MOVIES from "../containers/Movies"
 /**
  * The navgation bar will be used in 4 different pages
  * @param {Object} props -  

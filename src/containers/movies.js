@@ -1,8 +1,8 @@
 import React from 'react'
-import RecipeReviewCard from "../components/Card_Movie"
-import IconLabelTabs from "../components/movie-list-sort"
-import FloatingActionButtons from "../components/page_number"
-import "../css/page-movie.css"
+import RecipeReviewCard from "../components/CardMovie"
+import IconLabelTabs from "../components/MovieListSort"
+import FloatingActionButtons from "../components/PageNumber"
+import "../css/pageMovie.css"
 
 
 function MOVIES () {
