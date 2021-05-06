@@ -11,9 +11,12 @@ const useStyles = makeStyles((theme) => ({
       position:'fixed',
       display:'flex',
       flexDirection:'row',
-      right:'50%',
+      right:'45%',
       // left:'50%',
       bottom:'3 %',
+      zIndex: 1,
+      justifycontent: 'center',
+      alignitems: 'center',
       
     },
   },

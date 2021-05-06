@@ -14,12 +14,12 @@ function MOVIES () {
             </div>
             <div className="list-container">
             <RecipeReviewCard/>
+            {/* <RecipeReviewCard/>
             <RecipeReviewCard/>
-            <RecipeReviewCard/>
-            <RecipeReviewCard/>
+            <RecipeReviewCard/> */}
             </div>
             
-            <div id="pagination">
+            <div className="pagination">
                 <FloatingActionButtons/>
             </div>
         </div>

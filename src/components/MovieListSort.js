@@ -23,7 +23,7 @@ export default function IconLabelTabs() {
     setValue(newValue);
   };
   const [sortBy,setSortBy] = useState(false)
-  console.log(sortBy)
+  
 
 //   handlesort = (e) => {
 //       e.preventDefault();
@@ -47,9 +47,9 @@ export default function IconLabelTabs() {
         onClick={()=>setSortBy(!sortBy)}
       >
         <Tab icon={<ArrowDownwardTwoToneIcon />} label="Release Date" />
-        <Tab icon={<FavoriteIcon />} label="Title" />
-        <Tab icon={<PersonPinIcon />} label="Vote Count" />
-        <Tab icon={<FavoriteIcon />} label="Vote Average" />
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Title" />
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Count" />
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Average" />
       </Tabs>
     </Paper>
   );

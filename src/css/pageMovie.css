@@ -4,15 +4,17 @@
     justify-content:center;
     flex-wrap: wrap;
     margin-top: 1rem;
+    z-index:0;
 }
 
-/* #pagination{
-    position: fixed;
+.pagination{
+    /* position: fixed;
     top:0;
-    bottom:0;
     left:0;
-    right:0;
+    right:50%;
+    bottom:3%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-} */
+    justify-content: center; 
+     align-items: center; */
+     z-index:1;
+}
