@@ -1,0 +1,18 @@
+.list-container{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+/* #pagination{
+    position: fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
