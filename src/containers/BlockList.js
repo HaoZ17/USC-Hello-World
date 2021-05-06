@@ -40,12 +40,12 @@ const mapStateToProps = (state) => {
             index : index,
             poster : state.moviePosters.get(item),
             backdrop : state.movieBackdrops.get(item),
-            title: state.movieSet.get(item).title,
-            desc: state.movieSet.get(item).overview,
-            date: state.movieSet.get(item).release_date,
-            vote_count: state.movieSet.get(item).vote_count,
-            vote_avg: state.movieSet.get(item).vote_average,
-            popularity: state.movieSet.get(item).popularity,
+            // title: state.movieSet.get(item).title,
+            // desc: state.movieSet.get(item).overview,
+            // date: state.movieSet.get(item).release_date,
+            // vote_count: state.movieSet.get(item).vote_count,
+            // vote_avg: state.movieSet.get(item).vote_average,
+            // popularity: state.movieSet.get(item).popularity,
         }
     })
     console.log(blockListContents)
