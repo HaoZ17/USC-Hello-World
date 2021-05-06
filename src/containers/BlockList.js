@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import Card from "../components/Card"
+import BlockCard from "../components/BlockCard"
 import {actions} from '../actionsConst/actionCreater'
 import { bindActionCreators } from "redux";
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,7 +22,7 @@ class BlockList extends React.Component {
             <>  
                 <div className = "blockList">
                     {this.props.currList.length !== 0 
-                        ? this.props.currList.map( (item) => <Card content = {item}/>) 
+                        ? this.props.currList.map( (item) => <BlockCard content = {item} actionController = {this.props.actionController}/>) 
                         : <div> <p>WooHoo!! You Like Everything! There are no movies you don't like</p> </div>}
                 </div> 
             </>
@@ -33,19 +33,22 @@ class BlockList extends React.Component {
 const mapStateToProps = (state) => {
     console.log(state)
     const blockListIDs = Array.from(state.blockList.keys())
-    // const blockListPosters = blockListIDs.map(item => state.moviePosters.get(item))
-    // console.log(blockListPosters)
-
-    // return {
-    //     currList : blockListIDs,
-    // }
-    const blockListContents = blockListIDs.map(item => {
+    const blockListContents = blockListIDs.map((item, index) => {
+        // const itemObj = state.movieSet.get(item)
         return {
             id: item,
+            index : index,
             poster : state.moviePosters.get(item),
-            backdrop : state.movieBackdrops.get(item)
+            backdrop : state.movieBackdrops.get(item),
+            title: state.movieSet.get(item).title,
+            desc: state.movieSet.get(item).overview,
+            date: state.movieSet.get(item).release_date,
+            vote_count: state.movieSet.get(item).vote_count,
+            vote_avg: state.movieSet.get(item).vote_average,
+            popularity: state.movieSet.get(item).popularity,
         }
     })
+    console.log(blockListContents)
     return {
         currList : blockListContents,
     }
