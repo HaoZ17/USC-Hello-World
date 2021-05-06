@@ -4,7 +4,7 @@ import "../css/homePageContainer.css";
 function HomePageContainer(props) {
     return (
         <div className="home-page-container">
-            <MovieCarousel />
+            <MovieCarousel data={props.data}/>
         </div>
     )
 }
