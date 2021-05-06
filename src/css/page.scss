@@ -4,48 +4,64 @@
     --logo-text-color: rgb(0, 128, 255);
 }
 
+
 // page is the container with a header and the page content
-.page {
+.page-header {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    background-color: var(--primary-color);
+}
+
+#mobile-menu {
+    position: absolute;
+    top: 2em;
+    right: 1em;
+    color: white;
+    display: none;
+}
+
+#mobile-menu-exit {
+    position: absolute;
+    z-index: 999;
+    top: 1em;
+    left: 1em;
+    color: white;
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Verdana', monospace;
+}
+
+.logo {
+    position: relative;
+    margin: 1.5em;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+
+    #logo-text {
+        color: var(--logo-text-color);
+    }
 }
 
 // navigation bar
-.page-nav {
-    display: grid;
-    background-color: var(--primary-color);
-    grid-template-columns: 300px auto;
-    align-items: center;
-
-    a {
-        text-decoration: none;
-        font-family: 'Verdana', monospace;
-        
-    }
-    
-    .logo {
-        padding: 0.5em 0.5em 0.5em 3em;
-        color: white;
-        font-size: x-large;
-        font-weight: bold;
-
-        #logo-text {
-            color: var(--logo-text-color);
-        }
-    }
-
+#page-nav {
+    display: block;
+    align-items: center;    
+    position: relative;
+    margin: 0.3em;
     // router link of the navigation bar 
-    .page-nav-link {
+    #page-nav-link {
         display: flex;
-        justify-content: center;
-        max-width: fit-content;
-        padding-left: 5em;
-        
+        max-width: 40em;
+
         a {
             transition: color 0.5s ease;
             color: lightgrey;
             font-size: large;
-            padding: 1em 5em;
+            padding: 1em 0em 1em 3em;
         }
 
         a:hover {
@@ -53,8 +69,48 @@
         }
 
         .current-page {
-           color: darkgrey;
+            color: darkgrey;
         }
     }
 }
+
+@media only screen and (max-width: 798px) {
+    #mobile-menu {
+        display: inline-block;
+    }
+
+    #mobile-menu-exit {
+        display: inline-block;
+    }
+
+    #page-nav {
+        display: none;
+        #page-nav-link {
+            display: flex;
+            flex-flow: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            z-index: 999;
+            width: 50%;
+            right: 0;
+            top: 0;
+            margin-top: 0;
+            background: #20272E;
+            height: 100vh;
+            padding: 0;
+        
+            span {
+                display: inline;
+                font-size: medium;
+                margin: 0;
+            }
+
+            a {
+                padding: 1em 0em 1em;
+            }
+        }
+    }
+}
+
 
