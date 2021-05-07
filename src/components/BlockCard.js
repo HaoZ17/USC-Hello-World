@@ -34,16 +34,17 @@ const useStyles = makeStyles((theme) => ({
     animationName: "$root",
     animationDuration: `2s`,
     animationFillMode: "forwards",
+    // transform : "translateX(0em) translateY(0em) perspective(0em) rotate(0deg) rotateX(0deg) rotateY(0deg)",
 
-    transition: theme.transitions.create('transform', {
+    transition: theme.transitions.create('all', {
       duration: "1s",
     }),
-    '&:hover': {
+    '&:hover': {  
       backgroundColor: "red",
-      transform: "rotate(180deg)",
+      transform: "translateX(10em)",
       '@media (hover: none)': {
         backgroundColor: 'transparent',
-        transform: "rotate(0deg)",
+        transform: "translateX(0em)",
       },
       
     }
