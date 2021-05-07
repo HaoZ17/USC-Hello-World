@@ -13,9 +13,8 @@
   top: 44%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.2);
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 90vh;
 }
 
 .carousel-container .movie-detail {
@@ -38,13 +37,14 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
+  max-height: 100vh;
   padding: 2vh 0 2vh 0;
   opacity: 0;
   -webkit-transition: all 0.5s ease-in-out;
@@ -97,17 +97,11 @@
   .carousel-container .movie-detail {
     display: block;
     position: relative;
-    width: 100%;
-    height: 100%;
   }
   .carousel-container .movie-detail .poster-img {
-    display: absolute;
-    z-index: -2;
-    width: 80vw;
+    width: 140vw;
   }
   .carousel-container .movie-detail #movie-poster-info {
-    width: 80vw;
-    max-height: 80vh;
     height: -webkit-fit-content;
     height: -moz-fit-content;
     height: fit-content;
@@ -130,13 +124,13 @@
         -ms-flex-align: center;
             align-items: center;
     opacity: 0.0;
-    background-color: rgba(0, 0, 0, 0.7);
     left: 50%;
     top: 50%;
     -webkit-transform: translateX(-50%) translateY(-50%);
             transform: translateX(-50%) translateY(-50%);
     text-align: center;
-    width: 100%;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
     -webkit-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
   }

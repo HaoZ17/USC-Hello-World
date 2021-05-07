@@ -21,10 +21,12 @@
     position: fixed;
     width: 100%;
     left: 0em;
-    top: 6.5em;
-    width: 100%;
-    overflow:scroll;
-    height: 90%;
+    top: 6.3em;
+    overflow-x: hidden;
+    overflow-y: visible;
+    height: 100%;
+    padding-right: 1vw;
+
 }
 
 #mobile-menu {
