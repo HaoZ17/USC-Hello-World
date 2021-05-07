@@ -64,6 +64,23 @@ const movieListRequest=()=>{
     };
 }
 
+const setupDetail = (payload)=>({
+    type: Actions.SETDETAIL,
+    payload
+})
+
+const movieDetailRequest=(page)=>{
+    return (dispatch,getState)=>{
+        const storeData = { ...getState()};
+        // console.log(storeData, "in the thunk");
+        return axios.get(Actions.MOVIEDETAL1+page+Actions.MOVIEDETAL2).then((res) => {
+        // console.log(page);
+        // console.log(res.data);
+        dispatch(setupDetail(res.data));
+        });
+    };
+}
+
 export const actions = {
     movieListRequest,
     setupMovieList,
@@ -78,5 +95,7 @@ export const actions = {
     timeSort,
     voteSort,
     titleSort,
-    rateSort
+    rateSort,
+    setupDetail,
+    movieDetailRequest
 }
