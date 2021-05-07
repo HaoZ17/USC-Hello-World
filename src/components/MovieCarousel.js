@@ -11,7 +11,7 @@ const sharedStyle = {
     color: "lightgrey",
     margin: "50px",
     borderRadius: "20%",
-    
+    zIndex: 1000,
     "&:hover": {
         borderRadius: "0",
         backgroundColor: "rgba(0, 0, 0, 1)",
