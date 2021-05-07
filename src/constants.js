@@ -1,6 +1,6 @@
 const HTTPURL='https://api.themoviedb.org/3/movie/popular?api_key=e3add155aaa18dcda2221326d1b01de9&language=en-US&page='
 const SAVEMOVIETOMAP="SAVEMOVIETOMAP"
-const IMGURL="https://image.tmdb.org/t/p/w500/"
+const IMGURL="https://image.tmdb.org/t/p/original/"
 const PRE_PAGE="PRE_PAGE"
 const NEXT_PAGE="NEXT_PAGE"
 const LIKED_PAGE="LIKED_PAGE"

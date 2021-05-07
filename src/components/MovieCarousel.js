@@ -1,13 +1,22 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import {useSelector} from "react-redux"
 import "../css/movieCarousel.css";
 import { makeStyles } from '@material-ui/core/styles';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import MovieDetail from "./HomePageDetailCard";
 
 const sharedStyle = {
     fontSize: "xxx-large",
     color: "lightgrey",
-    position: "relative"
+    margin: "50px",
+    borderRadius: "20%",
+    
+    "&:hover": {
+        borderRadius: "0",
+        backgroundColor: "rgba(0, 0, 0, 1)",
+        transition: "all 1s ease",
+    }
 }
 
 const useStyles = makeStyles({
@@ -23,29 +32,55 @@ const useStyles = makeStyles({
 function MovieCarousel(props) {
     const classes = useStyles();
     const [count, setCount] = useState(0);
-    
+    const backDrops = useSelector(state => state.movieBackdrops);
+    const posters = useSelector(state => state.moviePosters);
+
     const handleClickPrev = () => {
-        if (count == 0) {
+        
+        if (count === 0) {
             setCount(props.data.length - 1);
         } else {
             setCount(count - 1);
         }
     }
 
+    useEffect(()=>{
+    
+    }, [])
+
+    
+    
     const handleClickNext = () => {
         if (count < props.data.length - 1) {
             setCount(count + 1);
         } else {
             setCount(0);
         }
+        console.log(count);
     }
+
+    const createMovieDetail = (detail, index) => {
+        return <MovieDetail 
+            show={index === count ? true : false} 
+            key={index} 
+            data={{detail, backdropUrl: backDrops.get(detail.id), posterUrl: posters.get(detail.id)}} 
+        />
+    }
+
+    const createAllMovieDetials = () => {
+        return props.data.map((detail, index)=>{
+            return createMovieDetail(detail, index)
+        })
+    }
+
+    const movieDetail = props.data[count];
 
     return (
         <React.Fragment>
             <div className="carousel-container">
-                <ArrowBackIosIcon className={classes.backArrow} onClick={handleClickPrev}/>
-                    <div className="mock-card">{props.data[count] ? `Movie ID: ${props.data[count].id}` : null}</div>
-                <ArrowForwardIosIcon className={classes.forwardArrow} onClick={handleClickNext}/>
+                <ArrowBackIcon className={classes.backArrow} onClick={handleClickPrev}/>
+                { movieDetail ? createAllMovieDetials() : null}
+                <ArrowForwardIcon className={classes.forwardArrow} onClick={handleClickNext}/>
             </div>
         </React.Fragment>
 
