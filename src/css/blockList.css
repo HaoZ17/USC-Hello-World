@@ -1,0 +1,17 @@
+.blockList {
+    /* background-color: grey; */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 798px) {
+    .blockList {
+        justify-content: center;
+        display: flex;
+        flex-flow: column;
+        
+    }   
+}
+
+
