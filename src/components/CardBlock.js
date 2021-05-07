@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transformStyle : "preserve3D",
     animationName: "$root",
-    animationDuration: `2s`,
+    animationDuration: `1s`,
     animationFillMode: "forwards",
     // transform : "translateX(0em) translateY(0em) perspective(0em) rotate(0deg) rotateX(0deg) rotateY(0deg)",
 
@@ -97,7 +97,7 @@ export default function RecipeReviewCard({content, actioncontroller}) {
   };
 
   return (
-    <Card className={classes.root} style = {{animationDelay: `${content.index}s`}}>
+    <Card className={classes.root} style = {{animationDelay: `${content.index*0.25}s`}}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
