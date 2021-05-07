@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import BlockCard from "../components/BlockCard"
+import CardBlock from "../components/CardBlock"
 import {actions} from '../actionsConst/actionCreater'
 import { bindActionCreators } from "redux";
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,7 +22,7 @@ class BlockList extends React.Component {
             <>  
                 <div className = "blockList">
                     {this.props.currList.length !== 0 
-                        ? this.props.currList.map( (item) => <BlockCard content = {item} actionController = {this.props.actionController}/>) 
+                        ? this.props.currList.map( (item) => <CardBlock content = {item} actionController = {this.props.actionController}/>) 
                         : <div> <p>WooHoo!! You Like Everything! There are no movies you don't like</p> </div>}
                 </div> 
             </>
