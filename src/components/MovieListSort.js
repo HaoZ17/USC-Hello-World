@@ -24,24 +24,6 @@ export default function IconLabelTabs(props) {
     setValue(newValue);
   };
 
-  
-
-  // const handlesort = (e) => {
-  //     e.preventDefault();
-  //     console.log(e);
-  //     toggleSort(e.target.value);
-  // }
-
-  // const toggleSort= (e) => {
-  //     if(e.target.value == true){
-  //       return <ArrowDownwardTwoToneIcon />
-        
-  //     }
-  //     else{
-  //       return <PersonPinIcon/>
-  //     }
-      
-  // }
 
   return (
     <Paper square className={classes.root}>
