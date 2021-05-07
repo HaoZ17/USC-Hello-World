@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import React, {useEffect, useState} from 'react'
 import {actions} from '../actionsConst/actionCreater'
 import { connect, useSelector } from "react-redux";
+import BlockList from "../containers/BlockList"
 
 /**
  * The navgation bar will be used in 4 different pages
@@ -95,7 +96,7 @@ function Page (props) {
                     <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <HomePage data={currentPageContent}/></Route>
                     <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> <MOVIES /></Route>
                     <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
-                    <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> here to render blocked page</Route>
+                    <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> <BlockList /></Route>
                 </Switch>
             </section>
         </Router>
