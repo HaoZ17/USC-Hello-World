@@ -20,7 +20,6 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-        
         case Actions.SAVEMOVIETOMAP:
             let mvIdupdate=new Set();
             let mvPosterUpdate=new Map(state.moviePoster);
@@ -44,6 +43,14 @@ const reducer = (state = initialState, action = {}) => {
                 movieSet:movieSetUpdate,
                 curPage: action.payload
             }
+        case Actions.SETDETAIL:
+            let DetailUpdate= new Map(state.movieSet)
+            DetailUpdate.set(action.payload.id,action.payload)
+            return{
+                ...state,
+                movieSet:DetailUpdate
+            }
+
         case Actions.NEXT_PAGE:
             if(state.page+1>state.cur_max_page){
                 return{
