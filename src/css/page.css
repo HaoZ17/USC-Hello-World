@@ -25,6 +25,8 @@
   left: 0em;
   top: 6.5em;
   width: 100%;
+  overflow: scroll;
+  height: 100%;
 }
 
 #mobile-menu {

@@ -15,25 +15,33 @@ const useStyles = makeStyles({
   },
 });
 
-export default function IconLabelTabs() {
+export default function IconLabelTabs(props) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
+  const [sortBy,setSortBy] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  const [sortBy,setSortBy] = useState(false)
+
   
 
-//   handlesort = (e) => {
-//       e.preventDefault();
-//   }
+  // const handlesort = (e) => {
+  //     e.preventDefault();
+  //     console.log(e);
+  //     toggleSort(e.target.value);
+  // }
 
-//   const toggleSort= (e) => {
-//       if(e.target.value == ture){
-//         return {``}
-//       }
-//   }
+  // const toggleSort= (e) => {
+  //     if(e.target.value == true){
+  //       return <ArrowDownwardTwoToneIcon />
+        
+  //     }
+  //     else{
+  //       return <PersonPinIcon/>
+  //     }
+      
+  // }
 
   return (
     <Paper square className={classes.root}>
@@ -44,12 +52,11 @@ export default function IconLabelTabs() {
         indicatorColor="secondary"
         textColor="secondary"
         aria-label="icon label tabs example"
-        onClick={()=>setSortBy(!sortBy)}
       >
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Release Date" />
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Title" />
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Count" />
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Average" />
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Release Date"  onClick={()=>{props.sorts.timeSort()}} />
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Title" onClick={()=>{props.sorts.titleSort()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Count" onClick={()=>{props.sorts.voteSort()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Average" onClick={()=>{props.sorts.rateSort()}}/>
       </Tabs>
     </Paper>
   );

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -14,10 +14,15 @@ import { red } from '@material-ui/core/colors';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import poster from '../images/avengers_poster.jpg'
-import Chip from '@material-ui/core/Chip';
 import Fab from '@material-ui/core/Fab';
+
+import { bindActionCreators } from "redux";
+import {actions} from '../actionsConst/actionCreater'
+import { connect } from "react-redux";
+
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +33,13 @@ const useStyles = makeStyles((theme) => ({
   },
   media: {
     height: '13rem',
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '56.25%', 
+    '&:hover': {
+        
+        "& $description":{
+        display:'none',
+        }
+    }
   },
   expand: {
     transform: 'rotate(180deg)',
@@ -46,72 +57,86 @@ const useStyles = makeStyles((theme) => ({
     extendedIcon: {
     marginRight: theme.spacing(1),
     marginTop:'0.5rem',
+    },
+    description:{
+      display:'block',
     }
 }));
 
-export default function RecipeReviewCard() {
+function RecipeReviewCard(props) {
+
+  const curPage = props.curPage;
+  const poster =props.poster;
+  const likes = props.likes;
+  // console.log(curPage);
+  // console.log(poster)
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+
   return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="vote-avg" className={classes.avatar}>
-            10
-          </Avatar>
-        }
+    curPage.map((item,index) => { 
+       return <Card className={classes.root} key={index}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="vote-avg" className={classes.avatar}>
+             <div>{item.vote_average}</div> 
+            </Avatar>
+          }
 
-        // <Fab variant="extended" >
-        // <NavigationIcon className={classes.extendedIcon} />
-        action={
-          <Fab aria-label="vote-count" className={classes.extendedIcon} variant="extended">
-            Vote Count: 111
-          </Fab>
-        }
-        title="Avegeners --- END GAME"
-        subheader="September 14, 2018"
-        
-        
-        
-      />
-      <CardMedia
-        className={classes.media}
-        image={poster}
-        title="movie title"
-      />
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-            minutes.
-          </Typography>
-        </CardContent>
-      </Collapse>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to like-list">
-          <ThumbDownIcon />
-        </IconButton>
-        <IconButton aria-label="add to block-list">
-          <ThumbUpIcon />
-        </IconButton>
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-     
-    </Card>
-  );
+          action={
+            <Fab aria-label="vote-count" className={classes.extendedIcon} variant="extended">
+              <div>Vote Count:{item.vote_count}</div>
+            </Fab>
+          }
+          title={item.original_title}
+          subheader={item.release_date}
+          
+          
+          
+        />
+        <CardMedia
+          className={classes.media}
+          image= {poster.get(item.id)}
+          title="movie title"
+        />
+        
+        <Collapse in={expanded} timeout="auto" unmountOnExit className={classes.description}>
+
+          <CardContent>
+            <Typography paragraph>
+             {item.overview}
+            </Typography>
+          </CardContent>
+        </Collapse>
+        
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to like-list" onClick={()=>{likes.moveToLikedPage()}}>
+            <ThumbDownIcon />
+          </IconButton>
+          <IconButton aria-label="add to block-list" onClick={()=>{likes.moveToBlockPage()}}>
+            <ThumbUpIcon />
+          </IconButton>
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            // onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+      
+      </Card>
+    })
+  )
 }
+export default RecipeReviewCard

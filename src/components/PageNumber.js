@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
       zIndex: 1,
       justifycontent: 'center',
       alignitems: 'center',
-      
     },
   },
 //   extendedIcon: {
@@ -25,22 +24,19 @@ const useStyles = makeStyles((theme) => ({
 //   },
 }));
 
-export default function FloatingActionButtons() {
+export default function FloatingActionButtons(props) {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Fab color="primary" aria-label="back" >
+      <Fab color="primary" aria-label="back" onClick={()=>{props.pages.moveToPrePage()}}>
         <ArrowBackIosTwoToneIcon />
       </Fab>
-      {/* <Fab color="secondary" aria-label="edit">
-        <EditIcon />
-      </Fab> */}
+      
       <Fab variant="extended" >
-        {/* <NavigationIcon className={classes.extendedIcon} /> */}
-        1/500
+        {props.pageNumber}
       </Fab>
-      <Fab color = "primary" aria-label="next">
+      <Fab color = "primary" aria-label="next" onClick={()=>{props.pages.moveToNextPage()}}>
         <ArrowForwardIosTwoToneIcon />
       </Fab>
     </div>

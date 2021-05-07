@@ -6,17 +6,18 @@
     margin-top: 1rem;
     z-index:0;
     width: 100%;
+   
+    
 }
 
 .pagination{
-    /* position: fixed;
-    top:0;
-    left:0;
+    position: fixed;
+
     right:50%;
-    bottom:3%;
+    bottom:10%;
     display: flex;
     justify-content: center; 
-     align-items: center; */
+     align-items: center;
      z-index:1;
 }
 
