@@ -2,6 +2,7 @@ import "../css/page.css";
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import AppsIcon from '@material-ui/icons/Apps';
 import CancelIcon from '@material-ui/icons/Cancel';
+import MOVIES from "../containers/Movies"
 import HomePage from "../containers/HomePageContainer";
 import { bindActionCreators } from "redux";
 import React, {useEffect, useState} from 'react'
@@ -35,9 +36,9 @@ function Page (props) {
 
     const currentPageContent = useSelector(state => state.curPage);
 
-    useEffect(() => {
-        props.actionController.movieListRequest();
-    }, []);
+    // useEffect(() => {
+    //     props.actionController.movieListRequest();
+    // }, []);
 
     useEffect(() => {
         props.actionController.movieListRequest();
@@ -93,7 +94,7 @@ function Page (props) {
             <section className="page-content">
                 <Switch>
                     <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <HomePage data={currentPageContent}/></Route>
-                    <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> here to render movies page</Route>
+                    <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> <MOVIES /></Route>
                     <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
                     <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> <BlockList /></Route>
                 </Switch>
