@@ -13,33 +13,22 @@
   top: 44%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 100vw;
-  height: 80vh;
+  height: 100vh;
 }
 
-.carousel-container .hidden {
-  display: none;
-}
-
-.carousel-container .show {
-  display: block;
-}
-
-.carousel-container .movie-detail-hidden {
-  display: none;
-}
-
-.carousel-container .movie-detail-show {
+.carousel-container .movie-detail {
   display: block;
   position: relative;
 }
 
-.carousel-container .movie-detail-show .poster-img {
+.carousel-container .movie-detail .poster-img {
   width: 20vw;
   opacity: 1;
 }
 
-.carousel-container .movie-detail-show #movie-poster-info {
+.carousel-container .movie-detail #movie-poster-info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -54,19 +43,27 @@
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  width: 80vw;
-  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  padding: 2vh 0 2vh 0;
+  opacity: 0;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
 }
 
-.carousel-container .movie-detail-show .backdrop-img {
+.carousel-container .movie-detail #movie-poster-info:hover {
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  opacity: 1;
+}
+
+.carousel-container .movie-detail .backdrop-img {
   position: absolute;
   left: 50%;
   top: 50%;
   -webkit-transform: translateX(-50%) translateY(-50%);
           transform: translateX(-50%) translateY(-50%);
-  width: 80vw;
-  height: 80vh;
+  width: 100vw;
 }
 
 .carousel-container #movie-info {
@@ -82,16 +79,88 @@
 .carousel-container #movie-info h1 {
   color: white;
   max-width: 30vw;
-  font-size: xxx-large;
+  font-size: 3vw;
 }
 
 .carousel-container #movie-info span, .carousel-container #movie-info p {
   color: white;
   max-width: 30vw;
   font-size: 1vw;
+  padding: 5px;
 }
 
 .carousel-container #movie-info span {
   font-size: medium;
+}
+
+@media only screen and (max-width: 798px) {
+  .carousel-container .movie-detail {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .carousel-container .movie-detail .poster-img {
+    display: absolute;
+    z-index: -2;
+    width: 80vw;
+  }
+  .carousel-container .movie-detail #movie-poster-info {
+    width: 80vw;
+    max-height: 80vh;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 0;
+    opacity: 1.0;
+  }
+  .carousel-container .movie-detail #movie-info {
+    position: absolute;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    opacity: 0.0;
+    background-color: rgba(0, 0, 0, 0.7);
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    width: 100%;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .carousel-container .movie-detail #movie-info h1 {
+    color: white;
+    max-width: 50vw;
+    font-size: 5vw;
+  }
+  .carousel-container .movie-detail #movie-info span, .carousel-container .movie-detail #movie-info p {
+    color: white;
+    max-width: 50vw;
+    font-size: 3vw;
+    padding: 5px;
+  }
+  .carousel-container .movie-detail #movie-info span {
+    font-size: 1vw;
+  }
+  .carousel-container .movie-detail #movie-info:hover {
+    opacity: 1;
+    -webkit-transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .carousel-container .movie-detail .backdrop-img {
+    display: none;
+  }
 }
 /*# sourceMappingURL=movieCarousel.css.map */
