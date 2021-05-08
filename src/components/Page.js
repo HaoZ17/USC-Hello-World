@@ -36,9 +36,9 @@ function Page (props) {
 
     const currentPageContent = useSelector(state => state.curPage);
 
-    useEffect(() => {
-        props.actionController.movieListRequest();
-    }, []);
+    // useEffect(() => {
+    //     props.actionController.movieListRequest();
+    // }, []);
 
     useEffect(() => {
         props.actionController.movieListRequest();
