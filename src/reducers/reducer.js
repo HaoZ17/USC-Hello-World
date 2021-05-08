@@ -10,7 +10,7 @@ const initialState = {
     movieBackdrops: new Map(),
     curPage:[],
     likedList: new Set([804435, 615457]),
-    blockList: new Set([804435, 615457]),
+    blockList: new Set(),
     timeInc : true,
     voteInc : true,
     titleInc : true,
@@ -21,12 +21,10 @@ const initialState = {
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case Actions.SAVEMOVIETOMAP:
-            console.log(state.moviePosters)
             let mvIdupdate=new Set();
             let mvPosterUpdate=new Map(state.moviePosters);
             let mvBackdropUpdate=new Map(state.movieBackdrops);
             let movieSetUpdate=new Map(state.movieSet)
-            console.log(mvPosterUpdate)
             action.payload.map((movie)=>{
                 mvIdupdate.add(movie.id);
                 movieSetUpdate.set(movie.id,movie);
