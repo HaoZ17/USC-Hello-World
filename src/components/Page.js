@@ -33,15 +33,13 @@ const ROUTER_MAPPING = {
 function Page (props) {
 
     const currentPageNumber = useSelector(state => state.page);
-
-    const currentPageContent = useSelector(state => state.curPage);
-
+    
     useEffect(() => {
-        props.actionController.movieListRequest();
-    }, []);
-
-    useEffect(() => {
-        props.actionController.movieListRequest();
+        props.actionController.movieListRequest().then((res)=>{
+            res.data.results.map(item=>{
+                props.actionController.movieDetailRequest(item.id);
+            })
+        });
     }, [currentPageNumber]);
 
     const [currentTitle, setcurrentTitle] = useState(HOME_PAGE);
@@ -93,7 +91,7 @@ function Page (props) {
             </div>
             <section className="page-content">
                 <Switch>
-                    <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <HomePage data={currentPageContent}/></Route>
+                    <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <HomePage /></Route>
                     <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> <MOVIES /></Route>
                     <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
                     <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> <BlockList /></Route>

@@ -37,8 +37,10 @@ class BlockList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     const blockListIDs = Array.from(state.blockList.keys())
+    console.log(state.moviePosters)
+
     const blockListContents = blockListIDs.map((item, index) => {
         const itemObj = state.movieSet.get(item)
         return {

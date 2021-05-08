@@ -1,6 +1,8 @@
 const HTTPURL='https://api.themoviedb.org/3/movie/popular?api_key=e3add155aaa18dcda2221326d1b01de9&language=en-US&page='
 const SAVEMOVIETOMAP="SAVEMOVIETOMAP"
 const IMGURL="https://image.tmdb.org/t/p/original/"
+const MOVIEDETAL1="https://api.themoviedb.org/3/movie/"
+const MOVIEDETAL2="?api_key=e3add155aaa18dcda2221326d1b01de9&language=en-US"
 const PRE_PAGE="PRE_PAGE"
 const NEXT_PAGE="NEXT_PAGE"
 const LIKED_PAGE="LIKED_PAGE"
@@ -13,6 +15,7 @@ const TIMESORT="TIMESORT"
 const VOTESORT="VOTESORT"
 const TITLESORT="TITLESORT"
 const RATESORT="RATESORT"
+const SETDETAIL="SETDETAIL"
 
 export default{
     HTTPURL,
@@ -29,5 +32,8 @@ export default{
     TIMESORT,
     VOTESORT,
     TITLESORT,
-    RATESORT
+    RATESORT,
+    MOVIEDETAL1,
+    MOVIEDETAL2,
+    SETDETAIL
 }

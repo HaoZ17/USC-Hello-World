@@ -6,42 +6,47 @@
     left: 50%;
     top: 44%;
     transform: translateX(-50%) translateY(-50%);
-    width: 100vw;
-    height: 80vh;
+    min-width: 100vw;
+    min-height: 90vh;
     
     .hidden {
-        display: none;
+        transition: all 1s ease-in-out;
+        opacity: 0;
     }
 
     .show {
-        display: block;
+        transition: all 1s ease-in-out;
+        opacity: 1;
     }
 
-    .movie-detail-hidden {
-        display: none;
-    }
-
-    .movie-detail-show {
+    .movie-detail {
         display: block;
-        position: relative;
+        position: absolute;
+        left: 50%;
 
         .poster-img {
             width: 20vw;
             opacity: 1;
-            
         }
 
-        #movie-poster-info {
+        .movie-poster-info {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             position: absolute;
-            left: 50%;
-            top: 50%;
             transform: translateX(-50%) translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.7);
-            width: 80vw;
-            height: 80vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 100vw;
+            max-height: 100vh;
+            padding: 2vh 0 2vh 0;
+            opacity: 0;
+            z-index: 999;
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                transition: all 0.2s ease-in-out;
+                opacity: 1;
+            }
         }
 
         .backdrop-img {
@@ -49,31 +54,115 @@
             left: 50%;
             top: 50%;
             transform: translateX(-50%) translateY(-50%);
-            width: 80vw;
-            height: 80vh;
+            width: 100vw;
         }
     }
 
-    #movie-info {
+    .movie-info {
         display: flex;
         flex-direction: column;
+        justify-content: center;
 
         h1 {
             color: white;
             max-width: 30vw;
-            font-size: xxx-large;
+            font-size: 3vw;
         }
-    
+
         span, p {
             color: white;
             max-width: 30vw;
-            font-size: 1vw;
+            font-size: large;
+            padding: 5px;
         }
 
         span {
             font-size: medium;
+            border-radius: 5%;
+            margin: 3px;
+            color: black;
+            font-weight: bold;
+            text-align: left;
         }
+
+
     }
 
 
+}
+
+.production-imgs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0;
+    background-color: rgba(255, 255, 255, 1);
+
+    border-radius: 0%;
+    .production-company-img {
+        width: auto;
+        height: 5vh;
+        padding: 3px;
+    }
+}
+
+@media only screen and (max-width: 798px) {
+    .carousel-container {
+        .movie-detail {
+            display: block;
+            position: absolute;
+
+            .poster-img {
+                width: auto;
+                height: 100vh;
+            }
+    
+            .movie-poster-info {
+                height: fit-content;
+                padding: 0;
+                opacity: 1.0;
+            }
+
+            .movie-info {
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                opacity: 0.0;
+                left: 50%;
+                top: 50%;
+                transform: translateX(-50%) translateY(-50%);
+                text-align: center;
+                width: 100vw;
+                height: 100vh;
+                background-color: rgba(0, 0, 0, 0.5);
+
+
+                h1 {
+                    color: white;
+                    max-width: 50vw;
+                    font-size: 5vw;
+                }
+                
+                span, p {
+                    max-width: 50vw;
+                    font-size: 3vw;
+                    padding: 5px;
+                }
+        
+                span {
+                    font-size: medium;
+                }
+                transition: opacity 0.5s ease-in-out;
+                &:hover {
+                    opacity: 1;
+                    transition: opacity 0.5s ease-in-out;
+                }
+            }
+            .backdrop-img {
+                display: none;
+            }
+        }
+    }
 }

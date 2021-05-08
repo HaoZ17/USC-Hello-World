@@ -11,7 +11,7 @@ const sharedStyle = {
     color: "lightgrey",
     margin: "50px",
     borderRadius: "20%",
-    
+    zIndex: 1000,
     "&:hover": {
         borderRadius: "0",
         backgroundColor: "rgba(0, 0, 0, 1)",
@@ -34,30 +34,30 @@ function MovieCarousel(props) {
     const [count, setCount] = useState(0);
     const backDrops = useSelector(state => state.movieBackdrops);
     const posters = useSelector(state => state.moviePosters);
+    const [timer, setTimer] = useState(null);
 
     const handleClickPrev = () => {
-        
         if (count === 0) {
-            setCount(props.data.length - 1);
+            setCount(props.data.size - 1);
         } else {
             setCount(count - 1);
         }
-    }
-
-    useEffect(()=>{
-    
-    }, [])
-
-    
+    } 
     
     const handleClickNext = () => {
-        if (count < props.data.length - 1) {
+        if (count < props.data.size - 1) {
             setCount(count + 1);
         } else {
             setCount(0);
         }
-        console.log(count);
     }
+
+    useEffect(() => {
+        console.log("component did update!")
+        clearTimeout(timer);
+        setTimer(setTimeout(handleClickNext, 10000));
+    }, [count])
+
 
     const createMovieDetail = (detail, index) => {
         return <MovieDetail 
@@ -68,18 +68,19 @@ function MovieCarousel(props) {
     }
 
     const createAllMovieDetials = () => {
-        return props.data.map((detail, index)=>{
-            return createMovieDetail(detail, index)
+        
+        return Array.from(moviesInfo.keys()).map((key, index)=>{
+            return createMovieDetail(moviesInfo.get(key), index)
         })
     }
 
-    const movieDetail = props.data[count];
+    const moviesInfo = props.data;
 
     return (
         <React.Fragment>
             <div className="carousel-container">
                 <ArrowBackIcon className={classes.backArrow} onClick={handleClickPrev}/>
-                { movieDetail ? createAllMovieDetials() : null}
+                {createAllMovieDetials()}
                 <ArrowForwardIcon className={classes.forwardArrow} onClick={handleClickNext}/>
             </div>
         </React.Fragment>

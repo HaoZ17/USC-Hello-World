@@ -6,23 +6,30 @@ import { connect } from "react-redux";
 class Test extends React.Component {
   componentDidMount() {
     this.props.actionController.movieListRequest();
-    console.log(this.props.page)
+    for(let mvid of this.props.movieIds){
+      this.props.actionController.movieDetailRequest(mvid);
+    }
   }
   componentDidUpdate(prevProps){
     if(this.props.page > prevProps.page){
       this.props.actionController.movieListRequest();
+      for(let mvid of this.props.movieIds){
+        this.props.actionController.movieDetailRequest(mvid);
+      }
     }
-    console.log("curPage:")
-    console.log(this.props.curPage)
+    // console.log("curPage:")
+    // console.log(this.props.movieSet)
   }
 
   zh=()=>{
-    console.log(this.props.dataMap);
-    console.log(this.props.likedList);
+    console.log(this.props.movieSet)
+    // console.log(this.props.dataMap);
+    // console.log(this.props.likedList);
+    console.log(this.props.movieSet.get(804435))
     console.log(this.props.blockList);
-    console.log(this.props.curPage);
-    console.log(this.props.moviePosters);
-    console.log(this.props.movieBackdrops);
+    // console.log(this.props.curPage);
+    // console.log(this.props.moviePosters);
+    // console.log(this.props.movieBackdrops);
     console.log("..................................................")
   }
   render(){
@@ -62,7 +69,8 @@ const mapStateToProps = (state) => {
     page:state.page,
     curPage:state.curPage,
     likedList:state.likedList,
-    blockList:state.blockList
+    blockList:state.blockList,
+    movieSet:state.movieSet
   };
 };
 

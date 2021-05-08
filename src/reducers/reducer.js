@@ -20,10 +20,9 @@ const initialState = {
 
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
-        
         case Actions.SAVEMOVIETOMAP:
             let mvIdupdate=new Set();
-            let mvPosterUpdate=new Map(state.moviePoster);
+            let mvPosterUpdate=new Map(state.moviePosters);
             let mvBackdropUpdate=new Map(state.movieBackdrops);
             let movieSetUpdate=new Map(state.movieSet)
             action.payload.map((movie)=>{
@@ -35,6 +34,7 @@ const reducer = (state = initialState, action = {}) => {
             for(let idnum of state.movieIds){
                 mvIdupdate.add(idnum)
             }
+            
             return{
                 ...state,
                 dataMap: new Map(state.dataMap.set(state.page,action.payload)),
@@ -44,6 +44,14 @@ const reducer = (state = initialState, action = {}) => {
                 movieSet:movieSetUpdate,
                 curPage: action.payload
             }
+        case Actions.SETDETAIL:
+            let DetailUpdate= new Map(state.movieSet)
+            DetailUpdate.set(action.payload.id,action.payload)
+            return{
+                ...state,
+                movieSet:DetailUpdate
+            }
+
         case Actions.NEXT_PAGE:
             if(state.page+1>state.cur_max_page){
                 return{

@@ -22,11 +22,13 @@
 
 .page-content {
   position: fixed;
-  left: 0em;
-  top: 6.5em;
   width: 100%;
-  overflow: scroll;
+  left: 0em;
+  top: 6.3em;
+  overflow-x: hidden;
+  overflow-y: visible;
   height: 100%;
+  padding-right: 1vw;
 }
 
 #mobile-menu {

@@ -56,10 +56,25 @@ const setupMovieList = (payload)=>({
 const movieListRequest=()=>{
     return (dispatch,getState)=>{
         const storeData = { ...getState()};
-        // console.log(storeData, "in the thunk");
-        return axios.get(Actions.HTTPURL+storeData.page).then((res) => {
-        // console.log(res.data.results);
-        dispatch(setupMovieList(res.data.results));
+        return axios.get(Actions.HTTPURL+storeData.page)
+        .then((res) => {
+            dispatch(setupMovieList(res.data.results));
+            return res;
+        });
+    };
+}
+
+const setupDetail = (payload)=>({
+    type: Actions.SETDETAIL,
+    payload
+})
+
+const movieDetailRequest=(page)=>{
+    return (dispatch,getState)=>{
+        const storeData = { ...getState()};
+        return axios.get(Actions.MOVIEDETAL1+page+Actions.MOVIEDETAL2)
+        .then((res) => {
+            dispatch(setupDetail(res.data));
         });
     };
 }
@@ -78,5 +93,7 @@ export const actions = {
     timeSort,
     voteSort,
     titleSort,
-    rateSort
+    rateSort,
+    setupDetail,
+    movieDetailRequest
 }
