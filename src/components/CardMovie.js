@@ -14,13 +14,9 @@ import { red } from '@material-ui/core/colors';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import poster from '../images/avengers_poster.jpg'
+// import poster from '../images/avengers_poster.jpg'
 import Fab from '@material-ui/core/Fab';
-
-import { bindActionCreators } from "redux";
-import {actions} from '../actionsConst/actionCreater'
-import { connect } from "react-redux";
-
+import Grow from '@material-ui/core/Grow';
 
 
 
@@ -49,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(0deg)',
   },
   avatar: {
     backgroundColor: red[500],
@@ -60,7 +56,10 @@ const useStyles = makeStyles((theme) => ({
     },
     description:{
       display:'block',
-    }
+    },
+    liked:{
+      
+    },
 }));
 
 function RecipeReviewCard(props) {
@@ -68,20 +67,29 @@ function RecipeReviewCard(props) {
   const curPage = props.curPage;
   const poster =props.poster;
   const likes = props.likes;
-  // console.log(curPage);
-  // console.log(poster)
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [movieList,setMovieList] = useState(false);
+  const [liked,setLiked] = useState(false);
 
 
   const handleExpandClick = () => {
-    setExpanded(!expanded);
+    // console.log(movieList);
+    // console.log(id)
+    // setMovieList(!movieList);
+    // if(movieList==true){
+      setExpanded(!expanded);
+    // }
+    
   };
 
+  // const handleLiked =() =>{
+  //   setLiked
+  // }
 
   return (
-    curPage.map((item,index) => { 
-       return <Card className={classes.root} key={index}>
+    curPage.map((item,movieList,setMovieList,liked,setLiked) => { 
+       return <Card className={classes.root} key={item.id}>
         <CardHeader
           avatar={
             <Avatar aria-label="vote-avg" className={classes.avatar}>
@@ -104,20 +112,20 @@ function RecipeReviewCard(props) {
         <CardMedia
           className={classes.media}
           image= {poster.get(item.id)}
-          title="movie title"
+          title={item.title}
         />
         
-        <Collapse in={expanded} timeout="auto" unmountOnExit className={classes.description}>
+        <Grow in={expanded} timeout="auto" unmountOnExit >
 
           <CardContent>
-            <Typography paragraph>
+            <Typography paragraph className={classes.description}>
              {item.overview}
             </Typography>
           </CardContent>
-        </Collapse>
+        </Grow>
         
         <CardActions disableSpacing>
-          <IconButton aria-label="add to like-list" onClick={()=>{likes.addToLikedPage(item.id)}}>
+          <IconButton className={classes.liked} aria-label="add to like-list" onClick={()=>{likes.addToLikedPage(item.id)}}>
             <ThumbUpIcon />
           </IconButton>
           <IconButton aria-label="add to block-list" onClick={()=>{likes.addToBlockPage(item.id)}}>
@@ -127,7 +135,7 @@ function RecipeReviewCard(props) {
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}
-            // onClick={handleExpandClick}
+            onClick={()=>{handleExpandClick(item.id,movieList)}}
             aria-expanded={expanded}
             aria-label="show more"
           >
