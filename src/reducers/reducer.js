@@ -10,7 +10,7 @@ const initialState = {
     movieBackdrops: new Map(),
     curPage:[],
     likedList: new Set([804435, 615457]),
-    blockList: new Set([]),
+    blockList: new Set([804435, 615457]),
     timeInc : true,
     voteInc : true,
     titleInc : true,

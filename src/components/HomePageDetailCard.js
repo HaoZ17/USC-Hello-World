@@ -7,7 +7,7 @@ function MovieDetail(props) {
 
     if (props.show) {
         return (
-            <div className={props.show ? "movie-detail-show": "movie-details-hidden"}>
+            <div className="movie-detail">
                 <img src={backdropUrl} alt={movieDetail.id} className="backdrop-img" />
                 <div id="movie-poster-info">
                     <img src={posterUrl} alt={movieDetail.id} className="poster-img"/>
