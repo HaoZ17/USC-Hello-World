@@ -3,7 +3,6 @@ import { connect } from "react-redux"
 import CardBlock from "../components/CardBlock"
 import {actions} from '../actionsConst/actionCreater'
 import { bindActionCreators } from "redux";
-import { makeStyles } from '@material-ui/core/styles';
 import "../css/blockList.css"
 
 class BlockList extends React.Component {

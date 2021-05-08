@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/movieCarousel.css"
 import CancelIcon from '@material-ui/icons/Cancel';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CardProto from "./CardProto";
 
 const useStyles = makeStyles((theme) => ({
@@ -149,14 +149,14 @@ export default function RecipeReviewCard({content, actionController}) {
   }
 
   const handleClick1 = () => {
-
-    console.log("moved to like page")
-    actionController.addToLikedPage(content.id)
+    console.log("moved to blocked page")
+    actionController.addToBlockPage(content.id)
+    
   }
 
   const handleClick2 = () => {
-    console.log("removed from block page")
-    actionController.removeFromBlockPage(content.id)
+    console.log("removed from liked page")
+    actionController.removeFromLikedPage(content.id)
   }
 
 
@@ -166,5 +166,5 @@ export default function RecipeReviewCard({content, actionController}) {
   const states = {classes, content, customizedClass, showDetail}
   const handlers = {handleClick1, handleClick2, handleOnHover,  handleMoreClick}
 
-  return CardProto(states, handlers, FavoriteIcon, CancelIcon)
+  return CardProto(states, handlers, SentimentVeryDissatisfiedIcon, CancelIcon)
 }
