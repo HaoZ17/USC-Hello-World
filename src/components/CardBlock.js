@@ -25,6 +25,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 345,
+    minWidth: 345,
+
     display: "flex",
     flexDirection: "column",
     margin: "10px",
@@ -41,10 +43,8 @@ const useStyles = makeStyles((theme) => ({
     }),
     '&:hover': {  
       backgroundColor: "red",
-      transform: "translateX(10em)",
       '@media (hover: none)': {
         backgroundColor: 'transparent',
-        transform: "translateX(0em)",
       },
       
     }
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   media: {
-    height: 0,
+    height: 50,
     paddingTop: '56.25%', // 16:9
     
   },
@@ -81,23 +81,91 @@ const useStyles = makeStyles((theme) => ({
   },
 
   textDesc: {
-    position: "relative",
+    position: "absolute",
+    marginTop:"69.25%",
+    marginLeft:"0.3em",
+    marginRight: "0.3em",
+    backgroundColor: "white",
+    animationName: "$textin",
+    animationFillMode: "forward",
+    animationDuration: `0.25s`,
+    opacity: 0.75,
+  },
+
+  "@keyframes textin": {
+    "0%": {
+      opacity: 0,
+      transform : "translateY(50em)",
+    },
+    "100%": {
+      opacity: 0.75,
+      transform : "translateY(0em)",
+    }
+  },
+
+  textHide : {
+    position: "absolute",
+    marginTop:"69.25%",
+    marginLeft:"0.3em",
+    marginRight: "0.3em",
+    backgroundColor: "white",
+    animationName: "$textout",
+    animationFillMode: "both",
+    animationDuration: `0.25s`,
+    opacity: 0,
+    transform: "translateY(0em)"
+  },
+
+  "@keyframes textout": {
+    "0%": {
+      opacity: 0.75,
+      transform : "translateY(0em)",
+      display : "absolute",
+    },
+    "100%": {
+      opacity: 0, 
+      transform : "translateY(10em)",
+      display: "none",
+    }
   },
 
 
 }));
 
-export default function RecipeReviewCard({content, actioncontroller}) {
-  console.log("index",content.index)
+export default function RecipeReviewCard({content, actionController}) {
   const classes = useStyles(content);
   const [expanded, setExpanded] = React.useState(false);
+  const [onHover, setHover] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  const handleOnHover = (type,e) => {
+    if (e.target.id === "textdesc") {
+      setHover(true)
+    } else if (e.target.id !== "textdesc") {
+      if (type === "enter") setHover(true);
+      else setHover(false);
+    }
+  }
+
+  const handleLikeClick = () => {
+    actionController.moveToLikedPage()
+  }
+
+  const handleRemoveClick = () => {
+    actionController.removeFromBlockPage()
+  }
+
+
+  const customizedClass = onHover ? classes.textDesc : classes.textHide;
+
   return (
-    <Card className={classes.root} style = {{animationDelay: `${content.index*0.25}s`}}>
+    <Card 
+    onMouseEnter = {(e) => handleOnHover("enter", e)}
+    onMouseLeave = {(e) => handleOnHover("leave", e)}
+    className={classes.root} style = {{animationDelay: `${content.index*0.25}s`}}>
       <CardHeader
         action={
           <IconButton aria-label="settings">
@@ -111,22 +179,26 @@ export default function RecipeReviewCard({content, actioncontroller}) {
       <CardMedia 
             className={classes.media}
             image={content.poster}
-            // title="Paella dish"
       />
 
-      <CardContent className = {classes.textDesc}>
-        <Typography variant="body2" color="textSecondary" component="p">
-          {content.desc}
+      {/* <CardContent className = {classes.textDesc}> */}
+      <CardContent 
+      id = "textdesc"
+      onMouseEnter = {(e) => handleOnHover("enter", e)}
+      onMouseLeave = {(e) => handleOnHover("leave", e)}
+      className = {customizedClass}>
+        <Typography  variant="body2" color="textSecondary" component="p">
+          {content.desc.substring(0,100) + "..."}
         </Typography>
       </CardContent>
 
 
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <CancelIcon/>
+          <CancelIcon onClick = {handleRemoveClick}/>
         </IconButton>
         <IconButton aria-label="share">
-          <FavoriteIcon/>
+          <FavoriteIcon onClick = {handleLikeClick}/>
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
@@ -142,7 +214,7 @@ export default function RecipeReviewCard({content, actioncontroller}) {
 
 
 
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
@@ -168,7 +240,7 @@ export default function RecipeReviewCard({content, actioncontroller}) {
             Set aside off of the heat to let rest for 10 minutes, and then serve.
           </Typography>
         </CardContent>
-      </Collapse>
+      </Collapse> */}
     </Card>
   );
 }

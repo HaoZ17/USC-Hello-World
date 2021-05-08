@@ -17,7 +17,9 @@ import "../css/blockList.css"
 //   }));
 
 class BlockList extends React.Component {
-    render() {
+
+
+    renderList = () => {
         return (
             <>  
                 <div className = "blockList">
@@ -28,6 +30,10 @@ class BlockList extends React.Component {
             </>
         )
     }
+
+    render() {
+        return this.renderList()
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -35,7 +41,6 @@ const mapStateToProps = (state) => {
     const blockListIDs = Array.from(state.blockList.keys())
     const blockListContents = blockListIDs.map((item, index) => {
         const itemObj = state.movieSet.get(item)
-        console.log(state.movieSet)
         return {
             id: item,
             index : index,
@@ -49,7 +54,6 @@ const mapStateToProps = (state) => {
             popularity: itemObj.popularity,
         }
     })
-    console.log(blockListContents)
     return {
         currList : blockListContents,
     }
