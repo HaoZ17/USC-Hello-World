@@ -6,16 +6,6 @@ import { bindActionCreators } from "redux";
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/blockList.css"
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//     //   maxWidth: 345,
-//       // maxWidth : 500,
-//       display: "flex",
-//       flexDirection: "row"
-//     },
-    
-//   }));
-
 class BlockList extends React.Component {
 
 
@@ -54,6 +44,7 @@ const mapStateToProps = (state) => {
             vote_count: itemObj.vote_count,
             vote_avg: itemObj.vote_average,
             popularity: itemObj.popularity,
+            data : itemObj,
         }
     })
     return {

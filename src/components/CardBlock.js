@@ -17,9 +17,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { findByLabelText } from '@testing-library/dom';
 
+import MovieDetail from "./HomePageDetailCard";
+import "../css/movieCarousel.css"
 
 import MenuIcon from '@material-ui/icons/Menu';
 import CancelIcon from '@material-ui/icons/Cancel';
+import CallReceivedIcon from '@material-ui/icons/CallReceived';
+import { Movie } from '@material-ui/icons';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -129,6 +133,32 @@ const useStyles = makeStyles((theme) => ({
     }
   },
 
+  hideDetail : {
+    display: "none",
+    opacity: 0,
+  },
+
+  showDetail : {
+    position : "absolute",
+    // transform: "translateY(2vh)",
+    paddingTop : "50vh",
+    zIndex: 3,
+  },
+
+  cancelDetailButton : {
+    display: "fixed", 
+    zIndex: 1000000, 
+    transform : "translateX(90vw) translateY(-35vh)",
+    fontSize : "xx-large",
+    // color: "white"
+    backgroundColor: "rgba(0,0,0,0.2)",
+    borderRadius: "50%",
+    '&:hover': {  
+      backgroundColor: "white",
+      opacity: 0.5,
+    }
+  }
+
 
 }));
 
@@ -136,6 +166,7 @@ export default function RecipeReviewCard({content, actionController}) {
   const classes = useStyles(content);
   const [expanded, setExpanded] = React.useState(false);
   const [onHover, setHover] = React.useState(false);
+  const [showDetail, setDetail] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -151,17 +182,32 @@ export default function RecipeReviewCard({content, actionController}) {
   }
 
   const handleLikeClick = () => {
-    actionController.moveToLikedPage()
+    actionController.moveToLikedPage(content.id)
   }
 
   const handleRemoveClick = () => {
-    actionController.removeFromBlockPage()
+    actionController.removeFromBlockPage(content.id)
   }
 
+  const handleMoreClick = () => {
+    setDetail(!showDetail)
+  }
 
   const customizedClass = onHover ? classes.textDesc : classes.textHide;
 
   return (
+    <>
+    <div className = {showDetail ? classes.showDetail + " carousel-container": classes.hideDetail}>
+
+      <IconButton aria-label="cancel">
+        <CallReceivedIcon className = {classes.cancelDetailButton} onClick = {handleMoreClick}/>
+      </IconButton>
+
+      {/* <button style = {{display: "fixed", zIndex: 1000000}} onClick = {handleMoreClick}>back</button> */}
+      <MovieDetail  
+        data = {{detail: content.data, backdropUrl: content.backdrop, posterUrl: content.poster,}} 
+        show = {true}/>
+    </div>
     <Card 
     onMouseEnter = {(e) => handleOnHover("enter", e)}
     onMouseLeave = {(e) => handleOnHover("leave", e)}
@@ -169,9 +215,10 @@ export default function RecipeReviewCard({content, actionController}) {
       <CardHeader
         action={
           <IconButton aria-label="settings">
-            <MenuIcon/>
+            <MenuIcon onClick = {handleMoreClick}/>
           </IconButton>
         }
+        titleTypographyProps={{variant:'subtitle2' }}
         title={content.title}
         subheader={content.date}
       />
@@ -242,5 +289,6 @@ export default function RecipeReviewCard({content, actionController}) {
         </CardContent>
       </Collapse> */}
     </Card>
+    </>
   );
 }

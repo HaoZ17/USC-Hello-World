@@ -15,7 +15,7 @@ function MovieDetail(props) {
     const backdropUrl = props.data.backdropUrl;
     const posterUrl = props.data.posterUrl;
 
-    console.log(movieDetail);
+    // console.log(movieDetail);
 
     const conditionalRenderGenres = (movieDetail) => {
         if (movieDetail.genres) {
