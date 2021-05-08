@@ -11,7 +11,10 @@ import ArrowDownwardTwoToneIcon from '@material-ui/icons/ArrowDownwardTwoTone';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    maxWidth: '100%',
+    width: "100vw",
+    position: "fixed",
+    top:"6.3em",
+    zIndex: 1,
   },
 });
 
