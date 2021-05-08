@@ -13,9 +13,21 @@ import CallReceivedIcon from '@material-ui/icons/CallReceived';
 
 
 
-export default function CardProto ({classes, content, customizedClass, showDetail},
-                                    {handleClick1, handleClick2, handleOnHover, handleMoreClick},
+export default function CardProto ({classes, content},
+                                    {handleClick1, handleClick2},
                                     WrappedButton1, WrappedButton2 ) {
+
+    const [onHoverOuter, setHover1] = React.useState(false);
+    const [onHoverInner, setHover2] = React.useState(false);
+    const [showDetail, setDetail] = React.useState(false);
+    const handleOnHover = (type,e) => {
+      setHover1(!onHoverOuter)
+    }
+    const customizedClass = (onHoverOuter)? classes.textDesc : classes.textHide;
+    const handleMoreClick = () => {
+      setDetail(!showDetail)
+    }
+
     return (
         <>
         <div className = {showDetail ? classes.showDetail + " carousel-container": classes.hideDetail}>
@@ -33,7 +45,8 @@ export default function CardProto ({classes, content, customizedClass, showDetai
         className={classes.root} 
         style = {{animationDelay: `${content.index*0.25}s`}}
         onMouseEnter = {(e) => handleOnHover("enter", e)} 
-        onMouseLeave = {(e) => handleOnHover("leave", e)} 
+        onMouseLeave = {(e) => handleOnHover("leave", e)}
+        // onMouseOver = {handleOnHover} 
          >
         <CardHeader
             action={
@@ -53,15 +66,15 @@ export default function CardProto ({classes, content, customizedClass, showDetai
     
         <CardContent 
             id = "textdesc"
-            onMouseEnter = {(e) => handleOnHover("enter", e)}
-            onMouseLeave = {(e) => handleOnHover("leave", e)}
+            pointerEvents = "none"
             className = {customizedClass}>
             <Typography  variant="body2" color="textSecondary" component="p">
               {content.desc.substring(0,100) + "..."}
             </Typography>
         </CardContent>
     
-        <CardActions disableSpacing>
+        <CardActions 
+        disableSpacing className = {classes.cardActions}>
             <IconButton aria-label="add to favorites">
                 <WrappedButton1 onClick = {handleClick1}/>
             </IconButton>

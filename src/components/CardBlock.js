@@ -20,10 +20,11 @@ const useStyles = makeStyles((theme) => ({
     animationDuration: `1s`,
     animationFillMode: "forwards",
     transition: theme.transitions.create('all', {
-      duration: "1s",
+      duration: "0.5s",
     }),
     '&:hover': {  
-      backgroundColor: "red",
+      // backgroundColor: "red",
+      marginTop:"-5px",
       '@media (hover: none)': {
         backgroundColor: 'transparent',
       },
@@ -61,8 +62,6 @@ const useStyles = makeStyles((theme) => ({
   textDesc: {
     position: "absolute",
     marginTop:"69.25%",
-    marginLeft:"0.3em",
-    marginRight: "0.3em",
     backgroundColor: "white",
     animationName: "$textin",
     animationFillMode: "forward",
@@ -84,8 +83,6 @@ const useStyles = makeStyles((theme) => ({
   textHide : {
     position: "absolute",
     marginTop:"69.25%",
-    marginLeft:"0.3em",
-    marginRight: "0.3em",
     backgroundColor: "white",
     animationName: "$textout",
     animationFillMode: "both",
@@ -129,27 +126,17 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "white",
       opacity: 0.5,
     }
+  },
+
+  cardActions : {
+    zIndex: 5,
   }
 }));
 
 export default function RecipeReviewCard({content, actionController}) {
   const classes = useStyles(content);
-  const [onHover, setHover] = React.useState(false);
-  const [showDetail, setDetail] = React.useState(false);
-
-  const customizedClass = onHover ? classes.textDesc : classes.textHide;
-
-  const handleOnHover = (type,e) => {
-    if (e.target.id === "textdesc") {
-      setHover(true)
-    } else if (e.target.id !== "textdesc") {
-      if (type === "enter") setHover(true);
-      else setHover(false);
-    }
-  }
 
   const handleClick1 = () => {
-
     console.log("moved to like page")
     actionController.addToLikedPage(content.id)
   }
@@ -159,12 +146,8 @@ export default function RecipeReviewCard({content, actionController}) {
     actionController.removeFromBlockPage(content.id)
   }
 
-
-  const handleMoreClick = () => {
-    setDetail(!showDetail)
-  }
-  const states = {classes, content, customizedClass, showDetail}
-  const handlers = {handleClick1, handleClick2, handleOnHover,  handleMoreClick}
+  const states = {classes, content}
+  const handlers = {handleClick1, handleClick2}
 
   return CardProto(states, handlers, FavoriteIcon, CancelIcon)
 }
