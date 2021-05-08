@@ -18,15 +18,10 @@ export default function CardProto ({classes, content},
                                     WrappedButton1, WrappedButton2 ) {
 
     const [onHoverOuter, setHover1] = React.useState(false);
-    const [onHoverInner, setHover2] = React.useState(false);
     const [showDetail, setDetail] = React.useState(false);
-    const handleOnHover = (type,e) => {
-      setHover1(!onHoverOuter)
-    }
     const customizedClass = (onHoverOuter)? classes.textDesc : classes.textHide;
-    const handleMoreClick = () => {
-      setDetail(!showDetail)
-    }
+    const handleMoreClick = () => {setDetail(!showDetail)}
+    const handleOnHover = (type,e) => {setHover1(!onHoverOuter)}
 
     return (
         <>
@@ -45,8 +40,7 @@ export default function CardProto ({classes, content},
         className={classes.root} 
         style = {{animationDelay: `${content.index*0.25}s`}}
         onMouseEnter = {(e) => handleOnHover("enter", e)} 
-        onMouseLeave = {(e) => handleOnHover("leave", e)}
-        // onMouseOver = {handleOnHover} 
+        onMouseLeave = {(e) => handleOnHover("leave", e)} 
          >
         <CardHeader
             action={

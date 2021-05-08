@@ -4,11 +4,12 @@ import "../css/movieCarousel.css"
 import CancelIcon from '@material-ui/icons/Cancel';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CardProto from "./CardProto";
+import {CARD} from "./Constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
-    minWidth: 345,
+    maxWidth: CARD.ROOTMAXWIDTH,
+    minWidth: CARD.ROOTMINWIDTH,
 
     display: "flex",
     flexDirection: "column",
@@ -17,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transformStyle : "preserve3D",
     animationName: "$root",
-    animationDuration: `1s`,
+    animationDuration: CARD.ROOTANIMATIONDURATION,
     animationFillMode: "forwards",
     transition: theme.transitions.create('all', {
-      duration: "0.5s",
+      duration: CARD.ROOTTRANSITIONDURATION,
     }),
     '&:hover': {  
     //   backgroundColor: "red",
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     animationName: "$textin",
     animationFillMode: "forward",
-    animationDuration: `0.25s`,
+    animationDuration: CARD.TEXTDESCANIMATIONDURATION,
     opacity: 0.75,
   },
 
@@ -118,13 +119,14 @@ const useStyles = makeStyles((theme) => ({
   cancelDetailButton : {
     display: "fixed", 
     zIndex: 1000000, 
-    transform : "translateX(90vw) translateY(-35vh)",
+    transform : "translateX(90vw) translateY(37vh) rotate(90deg)",
+    padding: "20px",
     fontSize : "xx-large",
     backgroundColor: "rgba(0,0,0,0.2)",
     borderRadius: "50%",
     '&:hover': {  
       backgroundColor: "white",
-      opacity: 0.5,
+      opacity: 0.75,
     }
   },
 
@@ -139,7 +141,6 @@ export default function RecipeReviewCard({content, actionController}) {
   const handleClick1 = () => {
     console.log("moved to blocked page")
     actionController.addToBlockPage(content.id)
-    
   }
 
   const handleClick2 = () => {
