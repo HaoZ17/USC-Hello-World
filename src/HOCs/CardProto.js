@@ -6,7 +6,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import MovieDetail from "./HomePageDetailCard";
+import MovieDetail from "../components/HomePageDetailCard";
 import "../css/movieCarousel.css"
 import MenuIcon from '@material-ui/icons/Menu';
 import CallReceivedIcon from '@material-ui/icons/CallReceived';
@@ -28,17 +28,15 @@ export default function CardProto ({classes, content, globalOnDetail},
         <>
         <div className = {globalOnDetail === content.id ? classes.showDetail + " carousel-container": classes.hideDetail}>
     
-          <IconButton aria-label="cancel">
-            <CallReceivedIcon className = {classes.cancelDetailButton} onClick = {() => handleMoreClick(-1)}/>
+          <IconButton aria-label="cancel" className = {classes.cancelDetailButton} onClick = {() => handleMoreClick(-1)}>
+            <CallReceivedIcon />
           </IconButton>
     
-          {/* <button style = {{display: "fixed", zIndex: 1000000}} onClick = {handleMoreClick}>back</button> */}
           <MovieDetail  
             data = {{detail: content.data, backdropUrl: content.backdrop, posterUrl: content.poster,}} 
             show = {true}/>
         </div>
         <Card 
-        // className={classes.root} 
         className = {globalOnDetail !== -1 ? classes.rootOnHide:classes.root}
         style = {{animationDelay: `${content.index*0.25}s`}}
         onMouseEnter = {(e) => handleOnHover("enter", e)} 
@@ -71,11 +69,11 @@ export default function CardProto ({classes, content, globalOnDetail},
     
         <CardActions 
         disableSpacing className = {classes.cardActions}>
-            <IconButton aria-label="add to favorites">
-                <WrappedButton1 onClick = {handleClick1}/>
+            <IconButton aria-label="add to favorites" onClick = {handleClick1}>
+                <WrappedButton1 />
             </IconButton>
-            <IconButton aria-label="share">
-                <WrappedButton2 onClick = {handleClick2}/>
+            <IconButton aria-label="share" onClick = {handleClick2}>
+                <WrappedButton2 />
             </IconButton>
         </CardActions>
         </Card>

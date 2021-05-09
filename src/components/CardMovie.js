@@ -126,14 +126,13 @@ function RecipeReviewCard(props) {
             }}>
             <ThumbUpIcon />
           </IconButton>
-          <IconButton aria-label="add to block-list" onClick={()=>{likes.addToBlockPage(item.id)}}>
+          <IconButton aria-label="add to block-list" color = {"inherit"} onClick={()=>{likes.addToBlockPage(item.id)}}>
             <ThumbDownIcon />
           </IconButton>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
             })}
-            // onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
           >
