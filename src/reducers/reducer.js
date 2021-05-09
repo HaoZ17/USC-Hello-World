@@ -10,7 +10,7 @@ const initialState = {
     movieBackdrops: new Map(),
     curPage:[],
     likedList: new Set([804435, 615457]),
-    blockList: new Set([804435, 615457]),
+    blockList: new Set(),
     timeInc : true,
     voteInc : true,
     titleInc : true,
@@ -21,12 +21,10 @@ const initialState = {
 const reducer = (state = initialState, action = {}) => {
     switch (action.type) {
         case Actions.SAVEMOVIETOMAP:
-            console.log(state.moviePosters)
             let mvIdupdate=new Set();
             let mvPosterUpdate=new Map(state.moviePosters);
             let mvBackdropUpdate=new Map(state.movieBackdrops);
             let movieSetUpdate=new Map(state.movieSet)
-            console.log(mvPosterUpdate)
             action.payload.map((movie)=>{
                 mvIdupdate.add(movie.id);
                 movieSetUpdate.set(movie.id,movie);
@@ -93,6 +91,7 @@ const reducer = (state = initialState, action = {}) => {
             if(blockListUpdateL.has(action.payload)){
                 blockListUpdateL.delete(action.payload)
             }
+            // console.log(state.curPage);
             return{
                 ...state,
                 likedList: likedListUpdateL,
@@ -101,13 +100,21 @@ const reducer = (state = initialState, action = {}) => {
         case Actions.ADD_BLOCK: //movie id
             let likedListUpdateB= state.likedList;
             let blockListUpdateB= state.blockList.add(action.payload);
+            let curPageUpdate= [];
             if(likedListUpdateB.has(action.payload)){
                 likedListUpdateB.delete(action.payload);
             }
+            for(let a of state.curPage){
+                if(a.id!==action.payload){
+                    curPageUpdate.push(a)
+                }
+            }
+            console.log(curPageUpdate);
             return{
                 ...state,
                 likedList: likedListUpdateB,
                 blockList: blockListUpdateB,
+                curPage: curPageUpdate
             }
         case Actions.REMOVE_LIKE:
             let likedListUpdateR= state.likedList.delete(action.payload)

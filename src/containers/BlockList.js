@@ -3,23 +3,12 @@ import { connect } from "react-redux"
 import CardBlock from "../components/CardBlock"
 import {actions} from '../actionsConst/actionCreater'
 import { bindActionCreators } from "redux";
-import { makeStyles } from '@material-ui/core/styles';
 import "../css/blockList.css"
 
-// const useStyles = makeStyles((theme) => ({
-//     root: {
-//     //   maxWidth: 345,
-//       // maxWidth : 500,
-//       display: "flex",
-//       flexDirection: "row"
-//     },
-    
-//   }));
-
 class BlockList extends React.Component {
-    
-    render() {
-        console.log(this.props.currList)
+
+
+    renderList = () => {
         return (
             <>  
                 <div className = "blockList">
@@ -30,6 +19,10 @@ class BlockList extends React.Component {
             </>
         )
     }
+
+    render() {
+        return this.renderList()
+    }
 }
 
 const mapStateToProps = (state) => {
@@ -39,7 +32,6 @@ const mapStateToProps = (state) => {
 
     const blockListContents = blockListIDs.map((item, index) => {
         const itemObj = state.movieSet.get(item)
-        // console.log(state.movieSet)
         return {
             id: item,
             index : index,
@@ -51,9 +43,9 @@ const mapStateToProps = (state) => {
             vote_count: itemObj.vote_count,
             vote_avg: itemObj.vote_average,
             popularity: itemObj.popularity,
+            data : itemObj,
         }
     })
-    // console.log(blockListContents)
     return {
         currList : blockListContents,
     }
