@@ -7,13 +7,34 @@ import "../css/blockList.css"
 
 class LikeList extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            showDetail: -1,
+        }
+    }
+
+    setDetailGlobal = (showDetail) => {
+        this.setState({
+            showDetail: showDetail
+        })
+    } 
+
+    componentDidUpdate = () => {
+        console.log("did update", this.state.showDetail)
+    }
 
     renderList = () => {
+        console.log("rendered")
         return (
             <>  
                 <div className = "blockList">
                     {this.props.currList.length !== 0 
-                        ? this.props.currList.map( (item) => <CardLike content = {item} actionController = {this.props.actionController}/>) 
+                        ? this.props.currList.map( (item) => <CardLike 
+                        setDetailGlobal = {this.setDetailGlobal} 
+                        globalOnDetail = {this.state.showDetail}
+                        content = {item} 
+                        actionController = {this.props.actionController}/>) 
                         : <div> <p>You Do not have any thing liked yet</p> </div>}
                 </div> 
             </>
@@ -26,10 +47,7 @@ class LikeList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     const likeListIDs = Array.from(state.likedList.keys())
-    console.log(state.moviePosters)
-
     const likeListContents = likeListIDs.map((item, index) => {
         const itemObj = state.movieSet.get(item)
         return {

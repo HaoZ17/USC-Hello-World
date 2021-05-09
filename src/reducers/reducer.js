@@ -1,3 +1,8 @@
+// TODO: there is a bug for movie list  when a movie gets removed from blocked list, the 
+// movie list did not rerender 
+// possible issue: the copying method of states is ...state, 
+// does not change the address of inside data.
+
 import Actions from "../constants";
 
 const initialState = {
@@ -9,7 +14,7 @@ const initialState = {
     moviePosters: new Map(),
     movieBackdrops: new Map(),
     curPage:[],
-    likedList: new Set([804435, 615457]),
+    likedList: new Set(),
     blockList: new Set(),
     timeInc : true,
     voteInc : true,
