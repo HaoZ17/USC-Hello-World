@@ -5,10 +5,10 @@ import FloatingActionButtons from "../components/PageNumber";
 import "../css/pageMovie.css";
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 function MOVIES (props) {
-    
+    const [moiveListId,setMovieListId] = useState([]);
 
     return (
         
@@ -17,7 +17,12 @@ function MOVIES (props) {
                 <IconLabelTabs sorts={props.actionController} /> 
             </div>
             <div className="list-container">
-            <RecipeReviewCard curPage={props.curPage} poster={props.moviePosters} likes={props.actionController}/>
+            <RecipeReviewCard 
+            curPage={props.curPage} 
+            poster={props.moviePosters} 
+            likes={props.actionController}
+            moiveListId={moiveListId}
+            />
             </div>
             
             <div className="pagination">
@@ -28,8 +33,11 @@ function MOVIES (props) {
 }
 
 const mapStateToProps = (state) => {
+    const movieListIDs = Array.from(state.curPage.keys())
+    // const moveListContents = movieListIDs.map((item,index)=>)
+
     return {
-      ...state
+      ...state//,movieListIDs
     };
   };
   

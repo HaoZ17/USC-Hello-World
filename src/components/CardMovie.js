@@ -30,12 +30,6 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: '13rem',
     paddingTop: '56.25%', 
-    '&:hover': {
-        
-        "& $description":{
-        display:'none',
-        }
-    }
   },
   expand: {
     transform: 'rotate(180deg)',
@@ -57,8 +51,16 @@ const useStyles = makeStyles((theme) => ({
     description:{
       display:'block',
     },
-    liked:{
-      
+    textDesc: {
+      position: "absolute",
+      marginTop:"69.25%",
+      marginLeft:"0.3em",
+      marginRight: "0.3em",
+      backgroundColor: "white",
+      animationName: "$textin",
+      animationFillMode: "forward",
+      animationDuration: `0.25s`,
+      opacity: 0.75,
     },
 }));
 
@@ -67,29 +69,40 @@ function RecipeReviewCard(props) {
   const curPage = props.curPage;
   const poster =props.poster;
   const likes = props.likes;
+  const statusMap = new Map();
+
+  // const [hoverStatus,setHoverStatus] = useState(new Map());
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [movieList,setMovieList] = useState(false);
-  const [liked,setLiked] = useState(false);
+  const [description,setDescription] = useState(false);
+  // const [liked,setLiked] = useState(false);
+  const [onHover, setHover] = React.useState(false);
 
 
-  const handleExpandClick = () => {
-    // console.log(movieList);
-    // console.log(id)
-    // setMovieList(!movieList);
-    // if(movieList==true){
-      setExpanded(!expanded);
-    // }
-    
+  const hanleHoverStatus =() =>{
+    curPage.map((item)=>{
+      statusMap.set(item.id,false) 
+    })
+    // statusMap.set(460465,false)
+    // console.log(statusMap)
+  }
+
+
+  const handleExpandClick = (id) => {
+      // setExpanded(!expanded);
+      statusMap.set(id,!statusMap.get(id));
+      // console.log(statusMap)
+      // console.log(statusMap.get(id))
   };
 
-  // const handleLiked =() =>{
-  //   setLiked
-  // }
-
   return (
-    curPage.map((item,movieList,setMovieList,liked,setLiked) => { 
-       return <Card className={classes.root} key={item.id}>
+    hanleHoverStatus(),
+    curPage.map((item) => { 
+      
+       return <Card className={classes.root}>
+        <button onClick={()=>{statusMap.set(item.id,false) }}>
+          test
+        </button>
         <CardHeader
           avatar={
             <Avatar aria-label="vote-avg" className={classes.avatar}>
@@ -105,6 +118,7 @@ function RecipeReviewCard(props) {
           }
           title={item.original_title}
           subheader={item.release_date}
+          // subheader={movieListId}
           
           
           
@@ -115,32 +129,40 @@ function RecipeReviewCard(props) {
           title={item.title}
         />
         
-        <Grow in={expanded} timeout="auto" unmountOnExit >
+        <Grow in={statusMap.get(item.id)} timeout="auto" unmountOnExit >
 
           <CardContent>
-            <Typography paragraph className={classes.description}>
+            <Typography paragraph >
              {item.overview}
             </Typography>
           </CardContent>
         </Grow>
-        
+      
+
         <CardActions disableSpacing>
-          <IconButton className={classes.liked} aria-label="add to like-list" onClick={()=>{likes.addToLikedPage(item.id)}}>
+          <IconButton 
+          className={classes.liked} 
+          aria-label="add to like-list" 
+          onClick={()=>{likes.addToLikedPage(item.id)}}>
             <ThumbUpIcon />
           </IconButton>
-          <IconButton aria-label="add to block-list" onClick={()=>{likes.addToBlockPage(item.id)}}>
+          <IconButton 
+          aria-label="add to block-list" 
+          onClick={()=>{likes.addToBlockPage(item.id)}}>
             <ThumbDownIcon />
           </IconButton>
+
           <IconButton
             className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
+              [classes.expandOpen]: statusMap.get(item.id),
             })}
-            onClick={()=>{handleExpandClick(item.id,movieList)}}
-            aria-expanded={expanded}
+            onClick={()=>{handleExpandClick()}}
+            // aria-expanded={statusMap.get(item.id)}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </IconButton>
+
         </CardActions>
       
       </Card>

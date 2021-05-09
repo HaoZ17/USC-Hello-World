@@ -49,7 +49,7 @@ export default function IconLabelTabs(props) {
 
   const handleSortRate = () =>{
     props.sorts.rateSort();
-    setSortByVote(!sortByVote);
+    setSortByRate(!sortByRate);
   }
 
   return (
