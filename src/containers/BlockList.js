@@ -7,13 +7,29 @@ import "../css/blockList.css"
 
 class BlockList extends React.Component {
 
+    constructor() {
+        super();
+        this.state = {
+            showDetail: -1,
+        }
+    }
+
+    setDetailGlobal = (showDetail) => {
+        this.setState({
+            showDetail: showDetail
+        })
+    } 
 
     renderList = () => {
         return (
             <>  
                 <div className = "blockList">
                     {this.props.currList.length !== 0 
-                        ? this.props.currList.map( (item) => <CardBlock content = {item} actionController = {this.props.actionController}/>) 
+                        ? this.props.currList.map( (item) => <CardBlock 
+                        setDetailGlobal = {this.setDetailGlobal} 
+                        globalOnDetail = {this.state.showDetail}
+                        content = {item} 
+                        actionController = {this.props.actionController}/>) 
                         : <div> <p>WooHoo!! You Like Everything! There are no movies you don't like</p> </div>}
                 </div> 
             </>
@@ -26,10 +42,7 @@ class BlockList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    // console.log(state)
     const blockListIDs = Array.from(state.blockList.keys())
-    console.log(state.moviePosters)
-
     const blockListContents = blockListIDs.map((item, index) => {
         const itemObj = state.movieSet.get(item)
         return {

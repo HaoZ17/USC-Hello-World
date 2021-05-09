@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
@@ -19,7 +19,8 @@ import Fab from '@material-ui/core/Fab';
 
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
-import { connect } from "react-redux";
+import { connect , useSelector} from "react-redux";
+
 
 
 
@@ -72,7 +73,9 @@ function RecipeReviewCard(props) {
   // console.log(poster)
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
+  const [numLike, setLike] = useState(0);
 
+  const likedSet = props.likedList;
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -117,7 +120,10 @@ function RecipeReviewCard(props) {
         </Collapse>
         
         <CardActions disableSpacing>
-          <IconButton aria-label="add to like-list" onClick={()=>{likes.addToLikedPage(item.id)}}>
+          <IconButton color = {likedSet.has(item.id)? "secondary" : "inherit"}aria-label="add to like-list" onClick={()=>{
+            likes.addToLikedPage(item.id);
+            setLike(Array.from(likedSet.keys()).length)
+            }}>
             <ThumbUpIcon />
           </IconButton>
           <IconButton aria-label="add to block-list" onClick={()=>{likes.addToBlockPage(item.id)}}>

@@ -9,7 +9,7 @@ const initialState = {
     moviePosters: new Map(),
     movieBackdrops: new Map(),
     curPage:[],
-    likedList: new Set([804435, 615457]),
+    likedList: new Set(),
     blockList: new Set(),
     timeInc : true,
     voteInc : true,
