@@ -91,6 +91,7 @@ const reducer = (state = initialState, action = {}) => {
             if(blockListUpdateL.has(action.payload)){
                 blockListUpdateL.delete(action.payload)
             }
+            // console.log(state.curPage);
             return{
                 ...state,
                 likedList: likedListUpdateL,
@@ -99,13 +100,21 @@ const reducer = (state = initialState, action = {}) => {
         case Actions.ADD_BLOCK: //movie id
             let likedListUpdateB= state.likedList;
             let blockListUpdateB= state.blockList.add(action.payload);
+            let curPageUpdate= [];
             if(likedListUpdateB.has(action.payload)){
                 likedListUpdateB.delete(action.payload);
             }
+            for(let a of state.curPage){
+                if(a.id!==action.payload){
+                    curPageUpdate.push(a)
+                }
+            }
+            console.log(curPageUpdate);
             return{
                 ...state,
                 likedList: likedListUpdateB,
                 blockList: blockListUpdateB,
+                curPage: curPageUpdate
             }
         case Actions.REMOVE_LIKE:
             let likedListUpdateR= state.likedList.delete(action.payload)
