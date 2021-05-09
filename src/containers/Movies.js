@@ -17,7 +17,7 @@ function MOVIES (props) {
                 <IconLabelTabs sorts={props.actionController} /> 
             </div>
             <div className="list-container">
-            <RecipeReviewCard curPage={props.curPage} poster={props.moviePosters} likes={props.actionController} likedList = {props.likedList}/>
+            <RecipeReviewCard curPage={props.curPage} poster={props.moviePosters} likes={props.actionController} likedList = {props.likedList} blockList = {props.blockList}/>
             </div>
             
             <div className="pagination">

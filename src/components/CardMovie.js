@@ -74,8 +74,8 @@ function RecipeReviewCard(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [numLike, setLike] = useState(0);
-
   const likedSet = props.likedList;
+  
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

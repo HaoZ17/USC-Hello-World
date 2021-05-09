@@ -1,3 +1,8 @@
+// TODO: there is a bug for movie list  when a movie gets removed from blocked list, the 
+// movie list did not rerender 
+// possible issue: the copying method of states is ...state, 
+// does not change the address of inside data.
+
 import Actions from "../constants";
 
 const initialState = {
