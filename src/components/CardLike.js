@@ -2,9 +2,9 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import "../css/movieCarousel.css"
 import CancelIcon from '@material-ui/icons/Cancel';
-import FavoriteIcon from '@material-ui/icons/Favorite';
+import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
 import CardProto from "./CardProto";
-import {CARD} from "./Constants"
+import {CARD} from "./Constants";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme) => ({
       duration: CARD.ROOT_TRANSITION_DURATION,
     }),
     '&:hover': {  
-      // backgroundColor: "red",
-      marginTop:"-5px",
+    //   backgroundColor: "red",
+        marginTop:"-5px",
       '@media (hover: none)': {
         backgroundColor: 'transparent',
       },
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
       transform : "translateY(50em)",
     },
     "100%": {
-      opacity: CARD.TEXT_DESC_OPACITY,
+      opacity: 0.75,
       transform : "translateY(0em)",
     }
   },
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
 
   "@keyframes textout": {
     "0%": {
-      opacity: CARD.TEXT_DESC_OPACITY,
+      opacity: 0.75,
       transform : "translateY(0em)",
       display : "absolute",
     },
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
 
   cancelDetailButton : {
     display: "fixed", 
-    zIndex: 10000, 
+    zIndex: 1000000, 
     transform : "translateX(90vw) translateY(37vh) rotate(90deg)",
     padding: "20px",
     fontSize : "xx-large",
@@ -139,17 +139,17 @@ export default function RecipeReviewCard({content, actionController}) {
   const classes = useStyles(content);
 
   const handleClick1 = () => {
-    console.log("moved to like page")
-    actionController.addToLikedPage(content.id)
+    console.log("moved to blocked page")
+    actionController.addToBlockPage(content.id)
   }
 
   const handleClick2 = () => {
-    console.log("removed from block page")
-    actionController.removeFromBlockPage(content.id)
+    console.log("removed from liked page")
+    actionController.removeFromLikedPage(content.id)
   }
 
   const states = {classes, content}
   const handlers = {handleClick1, handleClick2}
 
-  return CardProto(states, handlers, FavoriteIcon, CancelIcon)
+  return CardProto(states, handlers, SentimentVeryDissatisfiedIcon, CancelIcon)
 }

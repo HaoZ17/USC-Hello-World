@@ -9,6 +9,7 @@ import React, {useEffect, useState} from 'react'
 import {actions} from '../actionsConst/actionCreater'
 import { connect, useSelector } from "react-redux";
 import BlockList from "../containers/BlockList"
+import LikeList from "../containers/LikeList";
 
 /**
  * The navgation bar will be used in 4 different pages
@@ -93,7 +94,7 @@ function Page (props) {
                 <Switch>
                     <Route exact path={ROUTER_MAPPING[HOME_PAGE]} key={0}> <HomePage /></Route>
                     <Route exact path={ROUTER_MAPPING[MOVIE_LIST_PAGE]} key={1}> <MOVIES /></Route>
-                    <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> here to render liked page</Route>
+                    <Route exact path={ROUTER_MAPPING[LIKED_LIST_PAGE]} key={2}> <LikeList/></Route>
                     <Route exact path={ROUTER_MAPPING[BLOCKED_LIST_PAGE]} key={3}> <BlockList /></Route>
                 </Switch>
             </section>
