@@ -88,14 +88,23 @@ const reducer = (state = initialState, action = {}) => {
         case Actions.ADD_LIKE: //movie id
             let likedListUpdateL= state.likedList.add(action.payload);
             let blockListUpdateL= state.blockList;
+            let curPageUpdateL= [];
             if(blockListUpdateL.has(action.payload)){
                 blockListUpdateL.delete(action.payload)
+            }
+            for(let a of state.dataMap.get(state.page)){
+                if(state.blockList.has(a.id)){
+                    continue;
+                }else{
+                    curPageUpdateL.push(a);
+                }
             }
             // console.log(state.curPage);
             return{
                 ...state,
                 likedList: likedListUpdateL,
                 blockList: blockListUpdateL,
+                curPage:curPageUpdateL
             }
         case Actions.ADD_BLOCK: //movie id
             let likedListUpdateB= state.likedList;
@@ -124,9 +133,18 @@ const reducer = (state = initialState, action = {}) => {
             }
         case Actions.REMOVE_BLOCK:
             let blockListUpdateR = state.blockList.delete(action.payload)
+            let curPageUpdateR=[]
+            for(let a of state.dataMap.get(state.page)){
+                if(state.blockList.has(a.id)){
+                    continue;
+                }else{
+                    curPageUpdateR.push(a);
+                }
+            }
             return{
                 ...state,
-                blockListUpdateR
+                blockListUpdateR,
+                curPage: curPageUpdateR
             }
         case Actions.TIMESORT:
             let timeSortUpdate = state.curPage;

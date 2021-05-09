@@ -5,20 +5,35 @@ import { connect } from "react-redux";
 
 class Test extends React.Component {
   componentDidMount() {
-    this.props.actionController.movieListRequest();
-    for(let mvid of this.props.movieIds){
-      this.props.actionController.movieDetailRequest(mvid);
-    }
-  }
-  componentDidUpdate(prevProps){
-    if(this.props.page > prevProps.page){
+    const load=new Promise((res,rej)=>{
       this.props.actionController.movieListRequest();
+      this.props.movieSet!=null? res("pass"):rej("err");
+    })
+    load.then((res)=>{
+      console.log(res);
       for(let mvid of this.props.movieIds){
         this.props.actionController.movieDetailRequest(mvid);
       }
+    }).catch((rej)=>{
+      console.log(rej);
+    });
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.page > prevProps.page){
+      const load=new Promise((res,rej)=>{
+        this.props.actionController.movieListRequest();
+        this.props.movieSet!=null? res("pass"):rej("err");
+      })
+      load.then((res)=>{
+        console.log(res);
+        for(let mvid of this.props.movieIds){
+          this.props.actionController.movieDetailRequest(mvid);
+        }
+      }).catch((rej)=>{
+        console.log(rej);
+      });
     }
-    // console.log("curPage:")
-    // console.log(this.props.movieSet)
   }
 
   zh=()=>{
