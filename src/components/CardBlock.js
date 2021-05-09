@@ -8,8 +8,8 @@ import {CARD} from "./Constants"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: CARD.ROOTMAXWIDTH,
-    minWidth: CARD.ROOTMINWIDTH,
+    maxWidth: CARD.ROOT_MAX_WIDTH,
+    minWidth: CARD.ROOT_MIN_WIDTH,
 
     display: "flex",
     flexDirection: "column",
@@ -18,10 +18,10 @@ const useStyles = makeStyles((theme) => ({
     opacity: 0,
     transformStyle : "preserve3D",
     animationName: "$root",
-    animationDuration: CARD.ROOTANIMATIONDURATION,
+    animationDuration: CARD.ROOT_ANIMATION_DURATION,
     animationFillMode: "forwards",
     transition: theme.transitions.create('all', {
-      duration: CARD.ROOTTRANSITIONDURATION,
+      duration: CARD.ROOT_TRANSITION_DURATION,
     }),
     '&:hover': {  
       // backgroundColor: "red",
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     animationName: "$textin",
     animationFillMode: "forward",
-    animationDuration: CARD.TEXTDESCANIMATIONDURATION,
+    animationDuration: CARD.TEXT_DESC_ANIMATION_DURATION,
     opacity: 0.75,
   },
 
@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
       transform : "translateY(50em)",
     },
     "100%": {
-      opacity: 0.75,
+      opacity: CARD.TEXT_DESC_OPACITY,
       transform : "translateY(0em)",
     }
   },
@@ -94,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
 
   "@keyframes textout": {
     "0%": {
-      opacity: 0.75,
+      opacity: CARD.TEXT_DESC_OPACITY,
       transform : "translateY(0em)",
       display : "absolute",
     },
