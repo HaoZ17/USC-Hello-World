@@ -133,9 +133,18 @@ const reducer = (state = initialState, action = {}) => {
             }
         case Actions.REMOVE_BLOCK:
             let blockListUpdateR = state.blockList.delete(action.payload)
+            let curPageUpdateR=[]
+            for(let a of state.dataMap.get(state.page)){
+                if(state.blockList.has(a.id)){
+                    continue;
+                }else{
+                    curPageUpdateR.push(a);
+                }
+            }
             return{
                 ...state,
-                blockListUpdateR
+                blockListUpdateR,
+                curPage: curPageUpdateR
             }
         case Actions.TIMESORT:
             let timeSortUpdate = state.curPage;
