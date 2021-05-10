@@ -33,11 +33,9 @@ function MOVIES (props) {
 }
 
 const mapStateToProps = (state) => {
-    const movieListIDs = Array.from(state.curPage.keys())
-    // const moveListContents = movieListIDs.map((item,index)=>)
 
     return {
-      ...state//,movieListIDs
+      ...state
     };
   };
   
@@ -48,6 +46,5 @@ const mapStateToProps = (state) => {
   };
   
 export default connect(mapStateToProps, mapDispatchToProps)(MOVIES);
-// export default MOVIES;
   
 

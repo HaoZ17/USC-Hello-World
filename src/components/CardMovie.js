@@ -6,15 +6,12 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import poster from '../images/avengers_poster.jpg'
 import Fab from '@material-ui/core/Fab';
 import Grow from '@material-ui/core/Grow';
 
@@ -22,10 +19,11 @@ import Grow from '@material-ui/core/Grow';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 800,
     margin: '1rem',
     width: '25rem', 
     zIndex: 0,
+    justifyContent: "flex-start",
+    position: "relative"
   },
   media: {
     height: '13rem',
@@ -50,6 +48,12 @@ const useStyles = makeStyles((theme) => ({
     },
     description:{
       display:'block',
+      backgroundColor: "rgba(255, 255, 255, 0.58)",
+      maxHeight: "fit-content",
+      maxWidth: "25rem",
+      padding:"3px",
+      "&.p":
+      {fontWeight: "bold",}
     },
     textDesc: {
       position: "absolute",
@@ -71,28 +75,22 @@ function RecipeReviewCard(props) {
   const likes = props.likes;
   const statusMap = new Map();
 
-  // const [hoverStatus,setHoverStatus] = useState(new Map());
+  const [hoverStatus,setHoverStatus] = useState(new Map());
   const classes = useStyles();
-  const [expanded, setExpanded] = useState(false);
-  const [description,setDescription] = useState(false);
-  // const [liked,setLiked] = useState(false);
-  const [onHover, setHover] = React.useState(false);
 
 
   const hanleHoverStatus =() =>{
     curPage.map((item)=>{
       statusMap.set(item.id,false) 
     })
-    // statusMap.set(460465,false)
-    // console.log(statusMap)
+
   }
 
 
   const handleExpandClick = (id) => {
-      // setExpanded(!expanded);
-      statusMap.set(id,!statusMap.get(id));
-      // console.log(statusMap)
-      // console.log(statusMap.get(id))
+
+      setHoverStatus(new Map(hoverStatus.set(id,!hoverStatus.get(id))));
+      
   };
 
   return (
@@ -100,9 +98,6 @@ function RecipeReviewCard(props) {
     curPage.map((item) => { 
       
        return <Card className={classes.root}>
-        <button onClick={()=>{statusMap.set(item.id,false) }}>
-          test
-        </button>
         <CardHeader
           avatar={
             <Avatar aria-label="vote-avg" className={classes.avatar}>
@@ -118,10 +113,6 @@ function RecipeReviewCard(props) {
           }
           title={item.original_title}
           subheader={item.release_date}
-          // subheader={movieListId}
-          
-          
-          
         />
         <CardMedia
           className={classes.media}
@@ -129,12 +120,11 @@ function RecipeReviewCard(props) {
           title={item.title}
         />
         
-        <Grow in={statusMap.get(item.id)} timeout="auto" unmountOnExit >
-
-          <CardContent>
-            <Typography paragraph >
+        <Grow in={hoverStatus.get(item.id)} style={{ position: "absolute", bottom:"10%"}} timeout="auto" unmountOnExit >
+          <CardContent className={classes.description} >
+            <p>
              {item.overview}
-            </Typography>
+            </p>
           </CardContent>
         </Grow>
       
@@ -154,9 +144,9 @@ function RecipeReviewCard(props) {
 
           <IconButton
             className={clsx(classes.expand, {
-              [classes.expandOpen]: statusMap.get(item.id),
+              [classes.expandOpen]: hoverStatus.get(item.id)
             })}
-            onClick={()=>{handleExpandClick()}}
+            onClick={()=>{handleExpandClick(item.id)}}
             // aria-expanded={statusMap.get(item.id)}
             aria-label="show more"
           >
