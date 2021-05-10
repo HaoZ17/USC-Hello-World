@@ -1,3 +1,8 @@
+// TODO: there is a bug for movie list  when a movie gets removed from blocked list, the 
+// movie list did not rerender 
+// possible issue: the copying method of states is ...state, 
+// does not change the address of inside data.
+
 import Actions from "../constants";
 
 const initialState = {
@@ -9,7 +14,7 @@ const initialState = {
     moviePosters: new Map(),
     movieBackdrops: new Map(),
     curPage:[],
-    likedList: new Set([804435, 615457]),
+    likedList: new Set(),
     blockList: new Set(),
     timeInc : true,
     voteInc : true,
@@ -88,14 +93,23 @@ const reducer = (state = initialState, action = {}) => {
         case Actions.ADD_LIKE: //movie id
             let likedListUpdateL= state.likedList.add(action.payload);
             let blockListUpdateL= state.blockList;
+            let curPageUpdateL= [];
             if(blockListUpdateL.has(action.payload)){
                 blockListUpdateL.delete(action.payload)
+            }
+            for(let a of state.dataMap.get(state.page)){
+                if(state.blockList.has(a.id)){
+                    continue;
+                }else{
+                    curPageUpdateL.push(a);
+                }
             }
             // console.log(state.curPage);
             return{
                 ...state,
                 likedList: likedListUpdateL,
                 blockList: blockListUpdateL,
+                curPage:curPageUpdateL
             }
         case Actions.ADD_BLOCK: //movie id
             let likedListUpdateB= state.likedList;
@@ -124,9 +138,18 @@ const reducer = (state = initialState, action = {}) => {
             }
         case Actions.REMOVE_BLOCK:
             let blockListUpdateR = state.blockList.delete(action.payload)
+            let curPageUpdateR=[]
+            for(let a of state.dataMap.get(state.page)){
+                if(state.blockList.has(a.id)){
+                    continue;
+                }else{
+                    curPageUpdateR.push(a);
+                }
+            }
             return{
                 ...state,
-                blockListUpdateR
+                blockListUpdateR,
+                curPage: curPageUpdateR
             }
         case Actions.TIMESORT:
             let timeSortUpdate = state.curPage;
