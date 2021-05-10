@@ -13,22 +13,23 @@ import CallReceivedIcon from '@material-ui/icons/CallReceived';
 
 
 
-export default function CardProto ({classes, content},
-                                    {handleClick1, handleClick2},
+export default function CardProto ({classes, content, globalOnDetail},
+                                    {handleClick1, handleClick2, setDetailGlobal},
                                     WrappedButton1, WrappedButton2 ) {
 
     const [onHoverOuter, setHover1] = React.useState(false);
-    const [showDetail, setDetail] = React.useState(false);
     const customizedClass = (onHoverOuter)? classes.textDesc : classes.textHide;
-    const handleMoreClick = () => {setDetail(!showDetail)}
+    const handleMoreClick = (number) => {
+      setDetailGlobal(number)
+    }
     const handleOnHover = (type,e) => {setHover1(!onHoverOuter)}
 
     return (
         <>
-        <div className = {showDetail ? classes.showDetail + " carousel-container": classes.hideDetail}>
+        <div className = {globalOnDetail === content.id ? classes.showDetail + " carousel-container": classes.hideDetail}>
     
           <IconButton aria-label="cancel">
-            <CallReceivedIcon className = {classes.cancelDetailButton} onClick = {handleMoreClick}/>
+            <CallReceivedIcon className = {classes.cancelDetailButton} onClick = {() => handleMoreClick(-1)}/>
           </IconButton>
     
           {/* <button style = {{display: "fixed", zIndex: 1000000}} onClick = {handleMoreClick}>back</button> */}
@@ -37,15 +38,16 @@ export default function CardProto ({classes, content},
             show = {true}/>
         </div>
         <Card 
-        className={classes.root} 
+        // className={classes.root} 
+        className = {globalOnDetail !== -1 ? classes.rootOnHide:classes.root}
         style = {{animationDelay: `${content.index*0.25}s`}}
         onMouseEnter = {(e) => handleOnHover("enter", e)} 
         onMouseLeave = {(e) => handleOnHover("leave", e)} 
          >
         <CardHeader
             action={
-              <IconButton aria-label="settings">
-                <MenuIcon onClick = {handleMoreClick}/>
+              <IconButton onClick = {() => handleMoreClick(content.id)} aria-label="settings">
+                <MenuIcon />
               </IconButton>
             }
             titleTypographyProps={{variant:'subtitle2' }}
