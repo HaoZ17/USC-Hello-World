@@ -167,4 +167,11 @@ function RecipeReviewCard(props) {
     })
   )
 }
+RecipeReviewCard.propTypes = {
+  curPage: PropTypes.array,
+  poster:PropTypes.object,
+  likes:PropTypes.object,
+  statusMap:PropTypes.object,
+  likedSet:PropTypes.object
+}
 export default RecipeReviewCard
