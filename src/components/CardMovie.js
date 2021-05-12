@@ -17,8 +17,7 @@ import Grow from '@material-ui/core/Grow';
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
 import { connect , useSelector} from "react-redux";
-
-
+import PropTypes from 'prop-types';
 
 
 
@@ -167,5 +166,12 @@ function RecipeReviewCard(props) {
       </Card>
     })
   )
+}
+RecipeReviewCard.propTypes = {
+  curPage: PropTypes.array,
+  poster:PropTypes.object,
+  likes:PropTypes.object,
+  statusMap:PropTypes.object,
+  likedSet:PropTypes.object
 }
 export default RecipeReviewCard
