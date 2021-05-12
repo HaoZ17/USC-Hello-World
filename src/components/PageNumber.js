@@ -12,16 +12,13 @@ const useStyles = makeStyles((theme) => ({
       display:'flex',
       flexDirection:'row',
       right:'45%',
-      // left:'50%',
       bottom:'3 %',
       zIndex: 1,
       justifycontent: 'center',
       alignitems: 'center',
     },
   },
-//   extendedIcon: {
-//     marginRight: theme.spacing(1),
-//   },
+
 }));
 
 export default function FloatingActionButtons(props) {
@@ -34,7 +31,7 @@ export default function FloatingActionButtons(props) {
       </Fab>
       
       <Fab variant="extended" >
-        {props.pageNumber}
+        {props.pageNumber}/500
       </Fab>
       <Fab color = "primary" aria-label="next" onClick={()=>{props.pages.moveToNextPage()}}>
         <ArrowForwardIosTwoToneIcon />

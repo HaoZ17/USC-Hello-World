@@ -3,10 +3,9 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import PhoneIcon from '@material-ui/icons/Phone';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import PersonPinIcon from '@material-ui/icons/PersonPin';
+
 import ArrowDownwardTwoToneIcon from '@material-ui/icons/ArrowDownwardTwoTone';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles({
   root: {
@@ -16,35 +15,42 @@ const useStyles = makeStyles({
     top:"6.3em",
     zIndex: 1,
   },
+  expand: {
+    transform: 'rotate(180deg)',
+  }
 });
 
 export default function IconLabelTabs(props) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
-  const [sortBy,setSortBy] = useState(false);
+  const [sortByDate,setSortByDate] = useState(false);
+  const [sortByTitle,setSortByTitle] = useState(false);
+  const [sortByVote,setSortByVote] = useState(false);
+  const [sortByRate,setSortByRate] = useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
-  
+  const handleSortDate = () =>{
+    props.sorts.timeSort();
+    setSortByDate(!sortByDate);
+  }
 
-  // const handlesort = (e) => {
-  //     e.preventDefault();
-  //     console.log(e);
-  //     toggleSort(e.target.value);
-  // }
+  const handleSortTitle = () =>{
+    props.sorts.titleSort();
+    setSortByTitle(!sortByTitle);
+  }
 
-  // const toggleSort= (e) => {
-  //     if(e.target.value == true){
-  //       return <ArrowDownwardTwoToneIcon />
-        
-  //     }
-  //     else{
-  //       return <PersonPinIcon/>
-  //     }
-      
-  // }
+  const handleSortVote = () =>{
+    props.sorts.voteSort();
+    setSortByVote(!sortByVote);
+  }
+
+  const handleSortRate = () =>{
+    props.sorts.rateSort();
+    setSortByRate(!sortByRate);
+  }
 
   return (
     <Paper square className={classes.root}>
@@ -56,10 +62,10 @@ export default function IconLabelTabs(props) {
         textColor="secondary"
         aria-label="icon label tabs example"
       >
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Release Date"  onClick={()=>{props.sorts.timeSort()}} />
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Title" onClick={()=>{props.sorts.titleSort()}}/>
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Count" onClick={()=>{props.sorts.voteSort()}}/>
-        <Tab icon={<ArrowDownwardTwoToneIcon />} label="Vote Average" onClick={()=>{props.sorts.rateSort()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon className={{[classes.expand]:sortByDate}}/>} label="Release Date"  onClick={()=>{handleSortDate()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon className={{[classes.expand]:sortByTitle}}/>} label="Title" onClick={()=>{handleSortTitle()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon className={{[classes.expand]:sortByVote}}/>} label="Vote Count" onClick={()=>{handleSortVote()}}/>
+        <Tab icon={<ArrowDownwardTwoToneIcon className={{[classes.expand]:sortByRate}}/>} label="Vote Average" onClick={()=>{handleSortRate()}}/>
       </Tabs>
     </Paper>
   );

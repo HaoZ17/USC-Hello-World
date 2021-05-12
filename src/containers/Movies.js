@@ -5,10 +5,10 @@ import FloatingActionButtons from "../components/PageNumber";
 import "../css/pageMovie.css";
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 
 function MOVIES (props) {
-    
+    const [moiveListId,setMovieListId] = useState([]);
 
     return (
         
@@ -28,6 +28,7 @@ function MOVIES (props) {
 }
 
 const mapStateToProps = (state) => {
+
     return {
       ...state
     };
@@ -40,6 +41,5 @@ const mapStateToProps = (state) => {
   };
   
 export default connect(mapStateToProps, mapDispatchToProps)(MOVIES);
-// export default MOVIES;
   
 

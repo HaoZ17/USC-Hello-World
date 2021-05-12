@@ -6,17 +6,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import poster from '../images/avengers_poster.jpg'
 import Fab from '@material-ui/core/Fab';
-
+import Grow from '@material-ui/core/Grow';
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
 import { connect , useSelector} from "react-redux";
@@ -27,20 +24,15 @@ import { connect , useSelector} from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // maxWidth: 800,
     margin: '1rem',
     width: '25rem', 
     zIndex: 0,
+    justifyContent: "flex-start",
+    position: "relative"
   },
   media: {
     height: '13rem',
     paddingTop: '56.25%', 
-    '&:hover': {
-        
-        "& $description":{
-        display:'none',
-        }
-    }
   },
   expand: {
     transform: 'rotate(180deg)',
@@ -50,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)',
+    transform: 'rotate(0deg)',
   },
   avatar: {
     backgroundColor: red[500],
@@ -61,7 +53,24 @@ const useStyles = makeStyles((theme) => ({
     },
     description:{
       display:'block',
-    }
+      backgroundColor: "rgba(255, 255, 255, 0.58)",
+      maxHeight: "fit-content",
+      maxWidth: "25rem",
+      padding:"3px",
+      "&.p":
+      {fontWeight: "bold",}
+    },
+    textDesc: {
+      position: "absolute",
+      marginTop:"69.25%",
+      marginLeft:"0.3em",
+      marginRight: "0.3em",
+      backgroundColor: "white",
+      animationName: "$textin",
+      animationFillMode: "forward",
+      animationDuration: `0.25s`,
+      opacity: 0.75,
+    },
 }));
 
 function RecipeReviewCard(props) {
@@ -69,22 +78,35 @@ function RecipeReviewCard(props) {
   const curPage = props.curPage;
   const poster =props.poster;
   const likes = props.likes;
-  // console.log(curPage);
-  // console.log(poster)
+  const statusMap = new Map();
+
+  const [hoverStatus,setHoverStatus] = useState(new Map());
   const classes = useStyles();
+
   const [expanded, setExpanded] = useState(false);
   const [numLike, setLike] = useState(0);
   const likedSet = props.likedList;
   
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const hanleHoverStatus =() =>{
+    curPage.map((item)=>{
+      statusMap.set(item.id,false) 
+    })
+
+  }
+
+
+  const handleExpandClick = (id) => {
+
+      setHoverStatus(new Map(hoverStatus.set(id,!hoverStatus.get(id))));
+      
   };
 
-
   return (
-    curPage.map((item,index) => { 
-       return <Card className={classes.root} key={index}>
+    hanleHoverStatus(),
+    curPage.map((item) => { 
+      
+       return <Card className={classes.root}>
         <CardHeader
           avatar={
             <Avatar aria-label="vote-avg" className={classes.avatar}>
@@ -100,25 +122,22 @@ function RecipeReviewCard(props) {
           }
           title={item.original_title}
           subheader={item.release_date}
-          
-          
-          
         />
         <CardMedia
           className={classes.media}
           image= {poster.get(item.id)}
-          title="movie title"
+          title={item.title}
         />
         
-        <Collapse in={expanded} timeout="auto" unmountOnExit className={classes.description}>
-
-          <CardContent>
-            <Typography paragraph>
+        <Grow in={hoverStatus.get(item.id)} style={{ position: "absolute", bottom:"10%"}} timeout="auto" unmountOnExit >
+          <CardContent className={classes.description} >
+            <p>
              {item.overview}
-            </Typography>
+            </p>
           </CardContent>
-        </Collapse>
-        
+        </Grow>
+      
+
         <CardActions disableSpacing>
           <IconButton color = {likedSet.has(item.id)? "secondary" : "inherit"}aria-label="add to like-list" onClick={()=>{
             likes.addToLikedPage(item.id);
@@ -126,18 +145,23 @@ function RecipeReviewCard(props) {
             }}>
             <ThumbUpIcon />
           </IconButton>
-          <IconButton aria-label="add to block-list" color = {"inherit"} onClick={()=>{likes.addToBlockPage(item.id)}}>
+          <IconButton 
+          aria-label="add to block-list" 
+          onClick={()=>{likes.addToBlockPage(item.id)}}>
             <ThumbDownIcon />
           </IconButton>
+
           <IconButton
             className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded,
+              [classes.expandOpen]: hoverStatus.get(item.id)
             })}
-            aria-expanded={expanded}
+            onClick={()=>{handleExpandClick(item.id)}}
+            // aria-expanded={statusMap.get(item.id)}
             aria-label="show more"
           >
             <ExpandMoreIcon />
           </IconButton>
+
         </CardActions>
       
       </Card>
