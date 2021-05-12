@@ -1,4 +1,6 @@
 import "../css/movieCarousel.css";
+import PropTypes from 'prop-types';
+
 const IMGURL="https://image.tmdb.org/t/p/original/";
 const COLORS = [ 
     '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
@@ -61,10 +63,11 @@ function MovieDetail(props) {
                 </div>
             </div>
         )
-
-
-
 }
 
+MovieDetail.propTypes = {
+    show: PropTypes.bool, 
+    data: PropTypes.object
+}
 
 export default MovieDetail;

@@ -4,8 +4,9 @@ import "../css/movieCarousel.css"
 import CancelIcon from '@material-ui/icons/Cancel';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardProto from "../HOCs/CardProto";
+import PropTypes from 'prop-types';
 
-export default function RecipeReviewCard({content, actionController, setDetailGlobal, globalOnDetail}) {
+function RecipeReviewCard({content, actionController, setDetailGlobal, globalOnDetail}) {
   const classes = useStyles(content);
 
   const handleClick1 = () => {
@@ -23,3 +24,12 @@ export default function RecipeReviewCard({content, actionController, setDetailGl
 
   return CardProto(states, handlers, FavoriteIcon, CancelIcon)
 }
+
+RecipeReviewCard.propTypes = {
+  content: PropTypes.object,
+  actionController: PropTypes.object,
+  setDetailGlobal: PropTypes.func,
+  globalOnDetail: PropTypes.number
+}
+
+export default RecipeReviewCard;

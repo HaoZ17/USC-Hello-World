@@ -17,8 +17,7 @@ import Grow from '@material-ui/core/Grow';
 import { bindActionCreators } from "redux";
 import {actions} from '../actionsConst/actionCreater'
 import { connect , useSelector} from "react-redux";
-
-
+import PropTypes from 'prop-types';
 
 
 

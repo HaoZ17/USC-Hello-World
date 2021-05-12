@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import MovieDetail from "./HomePageDetailCard";
+import PropTypes from 'prop-types';
 
 const sharedStyle = {
     fontSize: "xxx-large",
@@ -86,6 +87,10 @@ function MovieCarousel(props) {
         </React.Fragment>
 
     )
+}
+
+MovieCarousel.propTypes = {
+    data: PropTypes.object
 }
 
 export default MovieCarousel;

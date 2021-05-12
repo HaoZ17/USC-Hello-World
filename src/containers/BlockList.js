@@ -64,7 +64,6 @@ const mapStateToProps = (state) => {
     }
 }
 
-
 const mapDispatchToProps = (dispatch) => {
   return {
     actionController: bindActionCreators({ ...actions }, dispatch)
@@ -72,4 +71,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlockList)
+export default connect(mapStateToProps, mapDispatchToProps)(BlockList);

@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-
+import PropTypes from 'prop-types';
 import ArrowDownwardTwoToneIcon from '@material-ui/icons/ArrowDownwardTwoTone';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function IconLabelTabs(props) {
+function IconLabelTabs(props) {
   const classes = useStyles();
   const [value, setValue] = useState(0);
   const [sortByDate,setSortByDate] = useState(false);
@@ -70,3 +70,5 @@ export default function IconLabelTabs(props) {
     </Paper>
   );
 }
+
+export default IconLabelTabs;
